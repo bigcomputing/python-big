@@ -1,0 +1,106 @@
+Introduction
+
+NetWorkSpaces (NWS) provides a framework to coordinate programs written
+in scripting languages; NWS currently supports the languages Python,
+Matlab, and R.  This User Guide is for the Python language, and it
+assumes that the reader is familiar with Python.
+
+A Python program uses variables to communicate data from one part of the
+program to another.  For example, 'x = 123' assigns the value 123 to the
+variable named x.  Later portions of the program can reference "x" to
+use the value 123.  This mechanism is generally known as binding.  In
+this case, the binding associates the value 123 with the name "x".  The
+collection of name-value bindings in use by a program is often referred
+to as its "workspace."
+
+Two or more Python programs use NWS to communicate data by means of
+name-value bindings stored in a network-based workspace (a NetWorkSpace,
+which in Python is an instance of a NetWorkSpace object).  One program
+creates a binding, while another program reads the value the binding
+associated with the name.  This is clearly quite similar to a
+traditional workspace; however, a NetWorkSpace differs from a
+traditional wprkspace in two important ways.
+
+First, in a setting in which two or more Python programs are
+interacting, it would not be unusual for one to attempt to "read" the
+value of a name before that name has been bound to a value.  Rather than
+receiving an "unbound variable" error, the reading program (by default)
+simply waits (or "blocks") until the binding occurs.  Second, a common
+usage paradigm involves processing a sequence of values for a given
+name.  One Python program carries out a computation based on the first
+value, while another might carry out a computation on the second, and so
+on.  To facilitate this paradigm, more than one value may be bound to a
+name in a workspace and values may be "removed" (fetch) as opposed to
+read (find).  By default, values bound to a name are consumed in
+first-in-first-out (FIFO) order, but other modes are supported:
+last-in-first-out (LIFO), multiset (no ordering implied) and single
+(only the last value bound is retained).  Since all its values could be
+removed, a name can, in fact, have no values associated with it.
+
+A NetWorkSpace provides five basic operations: store(), fetch(),
+fetchTry(), find(), and findTry().
+
+ - store() introduces a new binding for a specific name in a given
+   workspace.
+
+ - fetch() fetches (removes) a value associated with a name.
+
+ - find() reads a value without removing it. 
+
+Note that fetch() and find() block if no value is bound to the name.
+fetchTry() and findTry() are non-blocking; they return an empty value or
+user-supplied default if no value is available. 
+
+There are several additional NetWorkSpace operations:
+
+ - declare() declares a variable name with a specific mode.
+
+ - deleteVar() deletes a name from a workspace.
+
+ - listVars() provides a list of variables (bindings) in a workspace.
+
+ - currentWs() returns the name of the specified workspace.
+
+In addition to a NetWorkSpace, a Python client of NWS also uses an
+NWSServer object.  This object is created automatically when a new
+NetWorkSpace object is created, so you don't need to interact directly
+with it.  However, server object is an attribute of the NetWorkSpace, and
+you can access it using the Python syntax netWorkSpace_object@server.
+
+A NwsServer object supports the following actions:
+
+ - openWs() connects to a workspace or creates one if the specified
+   workspace does not exist. 
+
+ - useWs() uses a NetWorkSpace without claiming ownership.
+
+ - deleteWs() explicitly deletes a workspace.
+
+ - listWss() provides a list of workspaces in the server.  
+
+ - close() closes the connection to a workspace.  Depending on the
+   ownership, closing a connection to a workspace can result in removing
+   the workspace. 
+
+The operations above enable coordination of different programs using
+NWS.  There is also a mechanism, built on top of NWS, called Sleigh
+(inspired by R's SNOW package) to enable parallel function evaluation.
+Sleigh is especially useful for running "embarrassingly parallel"
+programs on multiple networked computers.  Once a sleigh is created by
+specifying the nodes that are participating in computations, you can
+use:
+
+ - eachElem() to invoke a function on each element of a list, with the
+   invocations being evaluated concurrently by the sleigh pariticipants.
+
+ - eachWorker() to have each participant in a sleigh invoke a function.
+   You can use this operation, for example, to build up requisite state
+   prior to an eachElem() invocation.
+
+Various data structures (workspaces, name-value bindings, etc.) in a NWS
+server can be monitored and even modified using a Web interface.  In
+distributed programming, even among cooperating programs, the state of
+shared data can be hard to understand.  The Web interface presents a
+simple way of checking current state remotely.  This tool can also be
+used for learning and debugging purposes, and for monitoring Python
+programs as well.

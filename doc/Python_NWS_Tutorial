@@ -1,0 +1,134 @@
+Python NWS Tutorial
+-------------------
+
+NetWorkSpaces (NWS) is a Python package that makes it very easy for
+different Python programs running on (potentially) different machines to
+communicate and coordinate with one another.  
+
+To get started with Python NWS, you'll first have to install the NWS
+server, and the Python NWS client.
+
+Next, an NWS server must be started.  This can be done from a shell
+using the nws command, as follows:
+
+% twistd -ny /etc/nws.tac
+
+From another window, start an interactive Python session, and import
+the NetWorkSpace class:
+
+% python
+>>> from nws.client import NetWorkSpace
+
+Next, create a work space called 'bayport':
+
+>>> ws = NetWorkSpace('bayport')
+
+This is using the NWS server on the local machine.  Additional arguments
+can be used to specify the hostname and port used by the NWS server if
+neccessary.
+
+Once we have a work space, we can write data into a variable using the
+store method:
+
+>>> ws.store('joe', 17)
+
+The variable 'joe' now has a value of 17 in our work space.
+
+To read that variable we use the find method:
+
+>>> age = ws.find('joe')
+
+which sets 'age' to 17.
+
+Note that the find method will block until the variable 'joe' has a
+value.  That is important when we're trying to read that variable from a
+different machine.  If it didn't block, you might have to repeatedly try
+to read the variable until it succeeded.  Of course, there are times
+when you don't want to block, but just want to see if some variable has
+a value.  That is done with the findTry method.
+
+Let's try reading a variable that doesn't exist using findTry:
+
+>>> age = ws.findTry('chet')
+
+That assigns 'None' to age, since we haven't stored any value to that
+variable.  If you'd rather have findTry return some other value when
+the variable doesn't exist (or has no value), you can use the command:
+
+>>> age = ws.findTry('chet', 0)
+
+which assigns 0 to age.
+
+So far, we've been using variables in work spaces in much the same way
+that global variables are used within a single program.  This is
+certainly useful, but NWS work spaces can also be used to send a
+sequence of messages from from one program to another.  If the store
+method is executed multiple times, the new values don't overwrite the
+previous values, they are all saved.  Now the find method will only be
+able to read the first value that was written, but this is where another
+method, called 'fetch' is useful.  The fetch method works the same as
+find, but in addition, it removes the value.
+
+Let's try write multiple values to a variable:
+
+>>> n = [16, 19, 25, 22]
+>>> for i in n:
+...     ws.store('biff', i)
+...
+
+To read the values, we just call fetch repeatedly:
+
+>>> n = []
+>>> for i in range(4):
+...     n.append(ws.fetch('biff'))
+...
+
+If we didn't know how many values were stored in a variable, we could
+have done the following:
+
+>>> n = []
+>>> while 1:
+...     t = ws.fetchTry('biff')
+...     if not t: break
+...     n.append(t)
+...
+
+This uses fetchTry, which works like fetch, except that it is
+non-blocking, just like findTry.
+
+Those are the basic operations provided by NWS.  It's a good idea to
+play around with these operations using two Python sessions.  That way,
+you can really transfer data between two different programs.  Also,
+you can see how the blocking operations work.  We were pretty careful
+never to block in any of the examples above because we were only using
+one Python session.
+
+To use two Python session, just execute Python in another window, import
+NetWorkSpace, and then open the 'bayport' work space.  This can be done
+with the same commands that we used previously, but this time, the
+command:
+
+>>> ws = NetWorkSpace('bayport')
+
+won't create the 'bayport' work space, since it already exists.  Now you
+can execute a operation such as:
+
+>>> x = ws.fetch('frank')
+
+in one session, watch it block for a minute, and then execute store in
+the other session:
+
+>>> ws.store('frank', 18)
+
+and see that the fetch in the first session completes.
+
+While you're experimenting with these operations, it can be very helpful
+to use the NWS server's web interface to see what's going on in your
+work spaces.  Just point your web browser to the URL:
+
+    http://localhost:8766
+
+(If you're using a browser on another machine from the NWS server you'll
+have to use the appropriate hostname, rather than 'localhost'.)
+
+That's all you need to get started.  Have fun!

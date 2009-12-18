@@ -1,0 +1,98 @@
+Python Sleigh
+-------------
+
+Sleigh is a Python package, built on top of NetWorkSpaces, that makes it
+easy to write simple parallel programs.  In order to get started with
+Sleigh, you first have to install the NetWorkSpaces server on at least
+one machine, and then you'll need to install NetWorkSpaces for Python on
+each of the machines that you'd like to execute your parallel program.
+To get started, you'll probably want to work on a single machine, but
+eventually you'll need to use multiple machines.  Of course, if you have
+a machine with multiple CPUs, Sleigh can be used to take advantage of
+those CPUs.  If you haven't read the primary README file (which covers
+NetWorkSpaces in general, but not Sleigh in particular), then please
+read that first.  You don't really have to know anything about the basic
+NetWorkSpaces Python API (NetWorkSpace, NwsServer, etc) to do useful
+things with Sleigh (as the Sleigh tutorial demonstrates), but just about
+all of the information in the primary README file will be important to
+the Sleigh user (installation, online documentation, babelfish, etc).
+
+Sleigh isn't separately installed: it is installed as part of
+NetWorkSpaces for Python.  But there are a few things that need to be
+done in order to run Sleigh scripts, that aren't needed to use the basic
+NetWorkSpaces API.  Most of the issues have to do with the way that
+Sleigh starts workers.  Here are some things to be aware of:
+
+  1) If you do a private installation, try to install NetWorkSpaces in
+  the same directory path on all of the machines.
+
+  On Posix systems, installing NetWorkSpaces into an NFS mounted
+  directory is a good idea, as long as it is mounted with the same name
+  everywhere.
+
+
+  2) Make sure that the directory containing the Python interpreter is
+  in the same directory on all of the workers.  It's possible to
+  configure a Sleigh to use different paths on different machines, but
+  that's a more advanced feature.
+
+
+  3) Make sure that Python can find the nws modules on each of the
+  worker machines.
+
+  With a System installation, that shouldn't be a problem.  With a
+  private installation, you'll need to use some method like setting the
+  PYTHONPATH environment variable to point to your nws directory (see
+  README for more information).  You'll need to set PYTHONPATH in your
+  shell's startup file (.bashrc, .zshenv, .cshrc,  etc) so that it is
+  set when ssh executes PythonNWSSleighWorker.sh.
+
+
+  4) If you're using the sshcmd method for launching remote workers,
+  then you should configure ssh to allow password-less remote execution.
+
+  By default, ssh will prompt you for a password for every worker that
+  it starts (which could be a lot).  Typing the same password even three
+  times gets very boring, so password-less remote execution is worth
+  setting up, if you haven't already done that.  See the documentation
+  for ssh-keygen, ssh-agent, and ssh-add for instructions on how to do
+  this.
+
+
+Web Launch
+----------
+
+If you need to start workers on machines that don't have an ssh daemon
+installed on them, you may wish to use the "web launch" method of
+starting workers.  It is more work, since it basically involves manually
+starting each worker.
+
+To use web launch, you need to set the Sleigh launch argument to the
+string 'web'.  The constructor won't return until you've started all of
+the workers that you wish to use.  To start a worker, you have to login
+to each machine, and perform the following series of steps:
+
+  1) Start the Python interpreter.
+
+  2) Using a web browser, go to the web interface of the NWS server that
+  is used by the Sleigh master (http://nwsmachine:8766).
+
+  3) Click on the workspace of your Sleigh (Sleigh workspaces start with
+  the prefix "sleigh_ride", unless you specified otherwise).
+
+  4) Click on the "runMe" variable.
+
+  5) Copy the text of one of the values.  The text will be something
+  like:
+
+    import nws.sleigh; nws.sleigh.launch('sleigh_ride_004_tmp', 'n1.xyz.com', 8765)
+
+  6) Paste that text into your Python session, executing it as a Python
+  command.
+
+When you've started up all the workers you want, go to the Sleigh
+workspace with a web browser, and click on the
+"deleteMeWhenAllWorkersStarted" variable, and then click on the "Remove
+Variable?" link to delete that variable.  This signals to the Sleigh
+constructor that all the workers have been started, and your Sleigh
+script can continue executing.

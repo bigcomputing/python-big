@@ -1,0 +1,1402 @@
+Help on module nws.client in nws:
+
+NAME
+    nws.client - Python API for performing NetWorkSpace operations.
+
+FILE
+    /usr/lib/python2.6/dist-packages/nws/client.py
+
+MODULE DOCS
+    http://docs.python.org/library/nws.client
+
+DESCRIPTION
+    NetWorkSpaces (NWS) is a powerful, open-source software package that
+    makes it easy to use clusters from within scripting languages like
+    Python, R, and Matlab.  It uses a Space-based approach, similar to
+    JavaSpaces (TM) for example, that makes it easier to write distributed
+    applications.
+    
+    Example:
+    
+    First start up the NWS server, using the twistd command:
+    
+        % twistd -y /etc/nws.tac
+    
+    Now you can perform operations against it using this module:
+    
+        % python
+        >>> from nws.client import NetWorkSpace
+        >>> nws = NetWorkSpace("test")
+        >>> nws.store("answer", 42)
+        >>> count = nws.fetch("answer")
+        >>> print "The answer is", count
+
+CLASSES
+    __builtin__.object
+        NetWorkSpace
+        NwsServer
+        NwsValueIterator
+    exceptions.Exception(exceptions.BaseException)
+        NwsException
+            NwsOperationException
+                NwsDeclarationFailedException
+                NwsNoWorkSpaceException
+                NwsPicklingException
+                NwsUnpicklingException
+            NwsServerException
+                NwsConnectException
+                NwsConnectionDroppedException
+                NwsUnsupportedOperationException
+    
+    class NetWorkSpace(__builtin__.object)
+     |  Perform operations against workspaces on NWS servers.
+     |  
+     |  The NetWorkSpace object is the basic object used to perform
+     |  operatations on workspaces.  Variables can be declared, created,
+     |  deleted, and the values of those variables can be manipulated.  You
+     |  can think of a workspace as a network accessible python dictionary,
+     |  where the variable names are keys in the dictionary, and the
+     |  associated values are lists of pickled python objects.  The store
+     |  method puts a value into the list associated with the specified
+     |  variable.  The find method returns a single value from a list.
+     |  Which value it returns depends on the "mode" of the variable (see
+     |  the declare method for more information on the variable mode).  If
+     |  the list is empty, the find method will not return until a value is
+     |  stored in that list.  The findTry method works like the find method,
+     |  but doesn't wait, returning a default value instead (somewhat like
+     |  the dictionary's get method).  The fetch method works like the find
+     |  method, but it will also remove the value from the list.  If
+     |  multiple clients are all blocked on a fetch operation, and a value
+     |  is stored into that variable, the server guarantees that only one
+     |  client will be able to fetch that value.  The fetchTry method, not
+     |  surprisingly, works like the fetch method, but doesn't wait,
+     |  returning a default value instead.
+     |  
+     |  Methods defined here:
+     |  
+     |  __getstate__(self)
+     |  
+     |  __init__(self, wsName='__default', serverHost='localhost', serverPort=8765, useUse=False, server=None, **opt)
+     |      Construct a NetWorkSpace object for the specified NwsServer.
+     |      
+     |      Arguments:
+     |      
+     |      wsName -- Name of the workspace.  There can only be one
+     |              workspace on the server with a given name, so two
+     |              clients can easily communicate with each other by both
+     |              creating a NetWorkSpace object with the same name on the
+     |              same server.  The first client that creates a workspace
+     |              that is willing to take ownership of it, will become the
+     |              owner (see the description of the useUse argument below
+     |              for more information on workspace ownership).
+     |      
+     |      serverHost -- Host name of the NWS server.  This argument is
+     |              ignored if the server argument is not None.  The default
+     |              value is 'localhost'.
+     |      
+     |      serverPort -- Port of the NWS server.  This argument is ignored
+     |              if the server argument is not None.  The default value
+     |              is 8765.
+     |      
+     |      useUse -- Boolean value indicating whether you only want to use
+     |              this workspace, or if you want to open it (which means
+     |              you're willing to take ownership of it, if it's not
+     |              already owned).
+     |      
+     |              The default value is False, meaning you are willing to
+     |              take ownership of this workspace.
+     |      
+     |      server -- NwsServer object to associate with this object.  If
+     |              the value is None (the default value), then a NwsServer
+     |              object will be constructed, using the host and port
+     |              specified with the serverHost and serverPort arguments.
+     |      
+     |              The default value is None.
+     |      
+     |      Keyword Arguments:
+     |      
+     |      persistent -- Boolean value indicating whether the workspace
+     |              should be persistent or not.  If a workspace is
+     |              persistent, it won't be purged when the owner
+     |              disconnects from the NWS server.  Note that only the
+     |              client who actually takes ownership of the workspace
+     |              can make the workspace persistent.  The persistent
+     |              argument is effectively ignored if useUse is True, since
+     |              that client never becomes the owner of the workspace.
+     |              If useUse is False, it is the client who actually
+     |              becomes the owner that determines whether it is
+     |              persistent or not.  That is, after the workspace is
+     |              owned, the persistent argument is ignored.  The default
+     |              value is false.
+     |      
+     |      create -- Boolean value indicating whether the workspace should
+     |              be created if it doesn't already exist.  The default
+     |              value is true.
+     |  
+     |  __setstate__(self, d)
+     |  
+     |  __str__(self)
+     |  
+     |  currentWs(self)
+     |      Return the name of the current workspace.
+     |      
+     |      ws.currentWs() -> string
+     |  
+     |  declare(self, varName, mode)
+     |      Declare a variable in a workspace with the specified mode.
+     |      
+     |      ws.declare(varName, mode)
+     |      
+     |      This method is used to specify a mode other than the default
+     |      mode of 'fifo'.  Legal values for the mode are:
+     |      
+     |          'fifo', 'lifo', 'multi', and 'single'
+     |      
+     |      In the first three modes, multiple value can be stored in
+     |      a variable.  If the mode is 'fifo', then values are retrieved
+     |      in a "first-in, first-out" fashion.  That is, the first value
+     |      stored, will be the first value fetched.  If the mode is 'lifo',
+     |      then values are retrieved in a "last-in, first-out" fashion,
+     |      as in a stack.  If the mode is 'multi', then the order of
+     |      retrieval is pseudorandom.
+     |      
+     |      The 'single' mode means that only a single value can be
+     |      stored in the variable.  Each new store operation will overwrite
+     |      the current value of the variable.
+     |      
+     |      If a variable is created using a store operation, then the
+     |      mode defaults to 'fifo'.  The mode cannot be changed with
+     |      subsequent calls to declare, regardless of whether the variable
+     |      was originally created using store or declare.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to declare.
+     |      
+     |      mode -- Mode of the variable.
+     |  
+     |  deleteVar(self, varName)
+     |      Delete a variable from a workspace.
+     |      
+     |      ws.deleteVar(varName)
+     |      
+     |      All values of the variable are destroyed, and all currently
+     |      blocking fetch and find operations will be aborted.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to delete.
+     |  
+     |  fetch(self, varName)
+     |      Return and remove a value of a variable from a workspace.
+     |      
+     |      ws.fetch(varName) -> object
+     |      
+     |      If the variable has no values, the operation will not return
+     |      until it does.  In other words, this is a "blocking" operation.
+     |      fetchTry is the "non-blocking" version of this method.
+     |      
+     |      Note that if many clients are all trying to fetch from the same
+     |      variable, only one client can fetch a given value.  Other
+     |      clients may have previously seen that value using the find or
+     |      findTry method, but only one client can ever fetch or fetchTry a
+     |      given value.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to fetch.
+     |  
+     |  fetchFile(self, varName, fobj)
+     |      Return and remove a value of a variable from a workspace.
+     |      
+     |      ws.fetchFile(varName, fobj) -> number of bytes written to file
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to fetch.
+     |      
+     |      fobj -- File to write data to.
+     |  
+     |  fetchTry(self, varName, missing=None)
+     |      Try to return and remove a value of a variable from a workspace.
+     |      
+     |      ws.fetchTry(varName[, missing]) -> object
+     |      
+     |      If the variable has no values, the operation will return
+     |      the value specified by "missing", which defaults to None.
+     |      
+     |      Note that if many clients are all trying to fetchTry from the
+     |      same variable, only one client can fetchTry a given value.
+     |      Other clients may have previously seen that value using the find
+     |      or findTry method, but only one client can ever fetch or
+     |      fetchTry a given value.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to fetch.
+     |      
+     |      missing -- Value to return if the variable has no values.
+     |  
+     |  fetchTryFile(self, varName, fobj)
+     |      Try to return and remove a value of a variable from a workspace.
+     |      
+     |      ws.fetchTryFile(varName, fobj) -> number of bytes written to file
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to fetch.
+     |      
+     |      fobj -- File to write data to.
+     |  
+     |  find(self, varName)
+     |      Return a value of a variable from a workspace.
+     |      
+     |      ws.find(varName) -> object
+     |      
+     |      If the variable has no values, the operation will not return
+     |      until it does.  In other words, this is a "blocking" operation.
+     |      findTry is the "non-blocking" version of this method.
+     |      
+     |      Note that (unlike fetch) find does not remove the value.  The
+     |      value remains in the variable.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to find.
+     |  
+     |  findFile(self, varName, fobj)
+     |      Return a value of a variable from a workspace.
+     |      
+     |      ws.findFile(varName, fobj) -> number of bytes written to file
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to find.
+     |      
+     |      fobj -- File to write data to.
+     |  
+     |  findTry(self, varName, missing=None)
+     |      Try to return a value of a variable in the workspace.
+     |      
+     |      ws.findTry(varName[, missing]) -> object
+     |      
+     |      If the variable has no values, the operation will return
+     |      the value specified by "missing", which defaults to the value
+     |      "None".
+     |      
+     |      Note that (unlike fetchTry) findTry does not remove the value.
+     |      The value remains in the variable.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to use.
+     |      
+     |      missing -- Value to return if the variable has no values.  The
+     |              default is None.
+     |  
+     |  findTryFile(self, varName, fobj)
+     |      Try to return a value of a variable in the workspace.
+     |      
+     |      ws.findTryFile(varName, fobj) -> number of bytes written to file
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to use.
+     |      
+     |      fobj -- File to write data to.
+     |  
+     |  ifetch(self, varName)
+     |      Return a fetch iterator for a workspace variable.
+     |      
+     |      ws.ifetch(varName) -> iterator
+     |      
+     |      Unlike ifind, this method doesn't really provide any extra
+     |      functionality over the fetch method.  It is provided for
+     |      completeness, and for those who just like iterators.
+     |      
+     |      Note that ifetch can be used on FIFO and SINGLE mode variables,
+     |      but not LIFO and MULTI mode variables.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to iterator over.
+     |  
+     |  ifetchTry(self, varName)
+     |      Return a fetchTry iterator for a workspace variable.
+     |      
+     |      ws.ifetchTry(varName) -> iterator
+     |      
+     |      Unlike ifindTry, this method doesn't really provide any extra
+     |      functionality over the fetchTry method.  It is provided for
+     |      completeness, and for those who just like iterators.
+     |      
+     |      Note that ifetchTry can be used on FIFO and SINGLE mode
+     |      variables, but not LIFO and MULTI mode variables.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to iterator over.
+     |  
+     |  ifind(self, varName)
+     |      Return a find iterator for a workspace variable.
+     |      
+     |      ws.ifind(varName) -> iterator
+     |      
+     |      This is very useful if you want to see every value in a variable
+     |      without destroying them.  Unlike the find method, ifind won't
+     |      return the same value repeatedly.  When there are no more values
+     |      to return, the iterator will block, waiting for a new value to
+     |      arrive.
+     |      
+     |      Note that ifind can be used on FIFO and SINGLE mode variables,
+     |      but not LIFO and MULTI mode variables.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to iterate over.
+     |  
+     |  ifindTry(self, varName)
+     |      Return a findTry iterator for a workspace variable.
+     |      
+     |      ws.ifindTry(varName) -> iterator
+     |      
+     |      This is very useful if you want to see every value in a variable
+     |      without destroying them.  Unlike the findTry method, ifindTry
+     |      won't return the same value repeatedly.  When there are no more
+     |      values to return, the iterator finishes.
+     |      
+     |      Note that ifindTry can be used on FIFO and SINGLE mode
+     |      variables, but not LIFO and MULTI mode variables.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable to iterate over.
+     |  
+     |  listVars(self, wsName=None, format='string')
+     |      Return a listing of the variables in the workspace.
+     |      
+     |      ws.listVars([wsName[, format]]) -> string or dictionary
+     |      
+     |      Arguments:
+     |      
+     |      wsName -- Name of the workspace to list.  The default is
+     |              None, which means to use the current workspace.
+     |      
+     |      format -- Output format to return.  Legal values include
+     |              'string' and 'dict'.  The 'string' format returns
+     |              a string which is suitable for printing.
+     |              The 'dict' format returns a dictionary of tuples, where
+     |              the first field is the variable name, the second is
+     |              the number of values, the third is the number of
+     |              fetchers, the fourth is the number of finders, and
+     |              the fifth is the variables mode.  The default value
+     |              is 'string'.
+     |  
+     |  makefile(self, varName, mode='r')
+     |  
+     |  store(self, varName, val)
+     |      Store a new value into a variable in the workspace.
+     |      
+     |      ws.store(varName, val)
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable.
+     |      
+     |      val -- Value to store in the variable.
+     |  
+     |  storeFile(self, varName, fobj, n=0)
+     |      Store a new value into a variable in the workspace from a file.
+     |      
+     |      ws.storeFile(varName, fobj[, n]) -> number of bytes read from file
+     |      
+     |      Note that if there is no more data to read from the file,
+     |      storeFile returns 0, and does not store a value into the
+     |      workspace variable.
+     |      
+     |      Arguments:
+     |      
+     |      varName -- Name of the workspace variable.
+     |      
+     |      fobj -- File to read data from.
+     |      
+     |      n -- Maximum number of bytes to read from the file.  A value of
+     |              zero means to read and store all of the data in the
+     |              file.  The default value is zero.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+    
+    class NwsConnectException(NwsServerException)
+     |  Unable to connect to the NWS server.
+     |  
+     |  Method resolution order:
+     |      NwsConnectException
+     |      NwsServerException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsConnectionDroppedException(NwsServerException)
+     |  NWS server connection dropped.
+     |  
+     |  Method resolution order:
+     |      NwsConnectionDroppedException
+     |      NwsServerException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsDeclarationFailedException(NwsOperationException)
+     |  Variable declaration failed.
+     |  
+     |  Method resolution order:
+     |      NwsDeclarationFailedException
+     |      NwsOperationException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsException(exceptions.Exception)
+     |  Base class for all exceptions raised by this module.
+     |  
+     |  Method resolution order:
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsNoWorkSpaceException(NwsOperationException)
+     |  No such workspace.
+     |  
+     |  Method resolution order:
+     |      NwsNoWorkSpaceException
+     |      NwsOperationException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsOperationException(NwsException)
+     |  Error performing an NWS operation.
+     |  
+     |  Method resolution order:
+     |      NwsOperationException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsPicklingException(NwsOperationException)
+     |  Error pickling an object.
+     |  
+     |  Method resolution order:
+     |      NwsPicklingException
+     |      NwsOperationException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, exception, wsName, varName)
+     |  
+     |  __str__(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsServer(__builtin__.object)
+     |  Perform operations against the NWS server.
+     |  
+     |  Operations against workspaces are performed
+     |  by using the NetWorkSpace class.
+     |  
+     |  Methods defined here:
+     |  
+     |  __getstate__(self)
+     |  
+     |  __init__(self, host='localhost', port=8765)
+     |      Create a connection to the NWS server.
+     |      
+     |      Arguments:
+     |      
+     |      host -- Host name of the NWS server.
+     |      
+     |      port -- Port of the NWS server.
+     |  
+     |  __setstate__(self, d)
+     |  
+     |  __str__(self)
+     |  
+     |  close(self)
+     |      Close the connection to the NWS server.
+     |      
+     |      s.close()
+     |      
+     |      This will indirectly cause the NWS server to purge all
+     |      non-persistent workspaces owned by this client.  Purging may
+     |      not happen immediately, though, but will depend on the load on
+     |      the server.
+     |  
+     |  deleteWs(self, wsName)
+     |      Delete the specfied workspace on the NWS server.
+     |      
+     |      s.deleteWs(wsName)
+     |      
+     |      Arguments:
+     |      
+     |      wsName -- Name of the workspace to delete.
+     |  
+     |  listWss(self, format='string')
+     |      Return a listing of all of the workspaces on the NWS server.
+     |      
+     |      s.listWss([format]) -> string or dictionary
+     |      
+     |      The listing is a string, consisting of lines, each ending with a
+     |      newline.  Each line consists of tab separated fields.  The first
+     |      field is the workspace name, prefixed with either a '>' or a
+     |      space, indicating whether the client owns that workspace or
+     |      not.
+     |  
+     |  mktempWs(self, wsName='__pyws__%d')
+     |      Make a temporary workspace on the NWS server.
+     |      
+     |      s.mktempWs([wsName]) -> string
+     |      
+     |      The workspace is named using the template and a number
+     |      generated by the server that makes the workspace name unique.
+     |      
+     |      Note that the workspace will be created, but it will not be
+     |      owned until some client that is willing to take ownership of it
+     |      opens it.
+     |      
+     |      The return value is the actual name of workspace that was
+     |      created.
+     |      
+     |      Arguments:
+     |      
+     |      wsName -- Template for the workspace name.  This must be a legal
+     |              'format' string, containing only an integer format
+     |              specifier.  The default is '__pyws__%d'.
+     |      
+     |      Examples:
+     |      
+     |          Let's create an NwsServer, call mktempWs to make a
+     |          workspace, and then use openWs to create a NetWorkSpace
+     |          object for that workspace:
+     |      
+     |              >>> from nws.client import NwsServer
+     |              >>> server = NwsServer()
+     |              >>> name = server.mktempWs('example_%d')
+     |              >>> workspace = server.openWs(name)
+     |  
+     |  openWs(self, wsName, space=None, **opt)
+     |      Open a workspace.
+     |      
+     |      s.openWs(wsName[, space]) -> space
+     |      
+     |      If called without a space argument, this method will construct a
+     |      NetWorkSpace object that will be associated with this NwsServer
+     |      object, and then perform an open operation with it against the NWS
+     |      server.  The open operation tells the NWS server that this
+     |      client wants to use that workspace, and is willing to take
+     |      ownership of it, if it doesn't already exist.
+     |      
+     |      The space argument is only intended to be used from the
+     |      NetWorkSpace constructor.
+     |      
+     |      The return value is the constructed NetWorkSpace object.
+     |      
+     |      Arguments:
+     |      
+     |      wsName -- Name of the workspace to open.  If the space argument
+     |              is not None, this value must match the space's name.
+     |      
+     |      space -- NetWorkSpace object to use for the open operation.
+     |              If the value is None, then openWs will construct a
+     |              NetWorkSpace object, specifying this NwsServer object as
+     |              the space's server.  Note that this argument is only
+     |              intended to be used from the NetWorkSpace constructor.
+     |              The default value is None.
+     |      
+     |      Keyword Arguments:
+     |      
+     |      persistent -- Boolean value indicating whether the workspace
+     |              should be persistent or not.  See the description of the
+     |              persistent argument in the __init__ method of the
+     |              NetWorkSpace class for more information.
+     |      
+     |      create -- Boolean value indicating whether the workspace should
+     |              be created if it doesn't already exist.  The default
+     |              value is true.
+     |      
+     |      Examples:
+     |      
+     |          Let's create an NwsServer, and then use openWs to create an
+     |          NetWorkSpace object for a workspace called 'foo':
+     |      
+     |              >>> from nws.client import NwsServer
+     |              >>> server = NwsServer()
+     |              >>> workspace = server.openWs('foo')
+     |      
+     |          Note that this is (nearly) equivalent to:
+     |      
+     |              >>> from nws.client import NetWorkSpace
+     |              >>> workspace = NetWorkSpace('foo')
+     |  
+     |  useWs(self, wsName, space=None, **opt)
+     |      Use a NetWorkSpace object.
+     |      
+     |      s.useWs(wsName[, space]) -> space
+     |      
+     |      If called without a space argument, this method will construct a
+     |      NetWorkSpace object that will be associated with this NwsServer
+     |      object, and then perform a use operation with it against the NWS
+     |      server.  The use operation tells the NWS server that this client
+     |      wants to use that workspace, but is not willing to take
+     |      ownership of it.
+     |      
+     |      The space argument is only intended to be used from the
+     |      NetWorkSpace constructor.
+     |      
+     |      The return value is the constructed NetWorkSpace object.
+     |      
+     |      Arguments:
+     |      
+     |      wsName -- Name of the workspace to use.  If the space argument
+     |              is not None, this value must match the space's name.
+     |      
+     |      space -- NetWorkSpace object to use for the use operation.
+     |              If the value is None, then useWs will construct a
+     |              NetWorkSpace object, specifying this NwsServer object as
+     |              the space's server.  Note that this argument is only
+     |              intended to be used from the NetWorkSpace constructor.
+     |              The default value is None.
+     |      
+     |      Keyword Arguments:
+     |      
+     |      create -- Boolean value indicating whether the workspace should
+     |              be created if it doesn't already exist.  The default
+     |              value is true.
+     |      
+     |      Examples:
+     |      
+     |          Let's create an NwsServer, and then use useWs to create an
+     |          NetWorkSpace object for a workspace called 'foo':
+     |      
+     |              >>> from nws.client import NwsServer
+     |              >>> server = NwsServer()
+     |              >>> workspace = server.useWs('foo')
+     |      
+     |          Note that this is (nearly) equivalent to:
+     |      
+     |              >>> from nws.client import NetWorkSpace
+     |              >>> workspace = NetWorkSpace('foo', useUse=True)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+    
+    class NwsServerException(NwsException)
+     |  Error communicating with the NWS server.
+     |  
+     |  Method resolution order:
+     |      NwsServerException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsUnpicklingException(NwsOperationException)
+     |  Error unpickling an object.
+     |  
+     |  Method resolution order:
+     |      NwsUnpicklingException
+     |      NwsOperationException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, exception, wsName, varName, obj)
+     |  
+     |  __str__(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsUnsupportedOperationException(NwsServerException)
+     |  NWS server does not support this operation.
+     |  
+     |  Method resolution order:
+     |      NwsUnsupportedOperationException
+     |      NwsServerException
+     |      NwsException
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors inherited from NwsException:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object at 0x8178c0>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+    
+    class NwsValueIterator(__builtin__.object)
+     |  Implements the iterated operations against a workspace variable.
+     |  
+     |  Instances of this class are returned from the NetWorkSpace ifetch,
+     |  ifetchTry, ifind, and ifindTry methods.
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, ws, varName, op)
+     |      Create an iterator over a workspace varible.
+     |      
+     |      This constructor is intended for internal use only.
+     |      
+     |      Arguments:
+     |      
+     |      ws -- NetWorkSpace object containing the specified variable.
+     |      
+     |      varName -- Name of the workspace variable to iterate over.
+     |      
+     |      op -- Operation to perform.
+     |  
+     |  __iter__(self)
+     |  
+     |  next(self)
+     |  
+     |  reset(self)
+     |      Reset the iterator to the beginning of the workspace variable.
+     |      
+     |      This conveniently restores the state of the iterator to when it
+     |      was first created.
+     |  
+     |  restart(self)
+     |      Allow the iterator to continue where it left off after stopping.
+     |      
+     |      The Python iterator protocol requires that iterators continue to
+     |      raise StopIteration once they've raised it.  The
+     |      NwsValueIterator will do that unless and until you call this
+     |      method.  That can be useful for the "Try" iterators, where you
+     |      might want to find all of the values in a variable, and at a
+     |      later point see if there are any new values without having to
+     |      see the previous ones again.
+     |  
+     |  writeTo(self, fobj)
+     |      Write the next value to the specified file or file-like object.
+     |      
+     |      it.writeTo(fobj) -> number of bytes written to file
+     |      
+     |      This is very much like the "next" method, but unlike "next", is
+     |      intended to be called explicitly.  It provides the same kind of
+     |      functionality as the various NetWorkSpace findFile/fetchTryFile
+     |      methods.  It is the easiest and most memory efficient way to
+     |      non-destructively write all of the values of a variable to a
+     |      file.
+     |      
+     |      Arguments:
+     |      
+     |      fobj -- File to write data to.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+DATA
+    DICT = 'dict'
+    FIFO = 'fifo'
+    LIFO = 'lifo'
+    MULTI = 'multi'
+    SINGLE = 'single'
+    STRING = 'string'
+    V_FETCHERS = 2
+    V_FINDERS = 3
+    V_MODE = 4
+    V_VALUES = 1
+    V_VARIABLE = 0
+    WS_MINE = 1
+    WS_NAME = 0
+    WS_NUMVARS = 4
+    WS_OWNER = 2
+    WS_PERSISTENT = 3
+    WS_VARLIST = 5
+    __all__ = ['NwsServer', 'NetWorkSpace', 'NwsValueIterator', 'NwsExcept...
+
+

@@ -1,0 +1,155 @@
+
+NetWorkSpaces for Python
+------------------------
+
+NetWorkSpaces (NWS) is a powerful, open-source software package that
+makes it easy to use clusters from within scripting languages like
+Python, R, and Matlab.  It uses a Space-based approach, similar to
+JavaSpaces (TM) for example, that makes it easier to write distributed
+applications.
+
+NetWorkSpaces for Python is the Python API to the NetWorkSpaces
+server.  It allows different Python scripts to communicate and
+coordinate with each other, and (with some restrictions) with scripts
+written in other languages, such as R and Matlab.  The restriction is
+that only strings can be passed between different languages.
+NetWorkSpaces doesn't provide a standard way to serialize objects
+between different languages, but by allowing strings to be used,
+programmers can choose their own mechanism (XML or YAML, for example).
+
+To use NetWorkSpaces for Python, you must have a NetWorkSpaces server,
+which is packaged separately.  The name of the package is nwsserver,
+and it should be available from the same sources as this package.  You
+don't have to install the server first, but you can't actually run a
+NetWorkSpaces for Python script until you've installed and executed
+the NetWorkSpaces server.
+
+
+Installation
+------------
+
+NetWorkSpaces for Python only requires that you have Python version
+2.2 or greater installed (although for Windows, we strongly recommend
+using Python 2.4).  It is distributed as a Python source distribution,
+using the standard Python distribution utilities.  The full
+installation instructions are in the accompanying INSTALL file, but
+here's a quick summary.
+
+For Posix systems:
+
+  % tar xzf python-nws-1.6.X.tar.gz
+  % cd python-nws-1.6.X
+  % python setup.py install
+
+You'll probably need to use a privileged account to do this.  If you
+don't want to (or can't) do that, you can use some options to install
+into a different location.  To get help on the install options,
+execute the command:
+
+  % python setup.py install --help
+
+For Windows:
+
+There is a binary installation available for Windows which is
+distributed as an EXE file.  After downloading it, you simply execute
+it and follow the instructions.
+
+
+Using NetWorkSpaces for Python
+------------------------------
+
+To use NetWorkSpaces for Python, you'll need a NetWorkSpaces server
+installed and running on some machine that you can connect to.  The
+NetWorkSpaces server is implemented in Python using the Twisted
+networking framework, and it is packaged separately from the client
+software.  The server only needs to be installed on one machine, while
+you may wish to install and use the client software on many machines
+on your network.
+
+If you haven't installed the NetWorkSpaces server yet, you'll need to
+install and run that before you'll be able to actually use the client
+software.
+
+Once you're got a NetWorkSpaces server running, you're ready to try it
+out.  If it's running on your local machine, you can test your client
+installation right away, as follows:
+
+  % python
+  >>> from nws.client import NetWorkSpace
+  >>> ws = NetWorkSpace("foo")
+  >>> ws.store("answer", 42)
+
+If you can get that far, you're in pretty good shape.  If the import
+fails, then probably you didn't set PYTHONPATH correctly, assuming
+it's a private installation.  If it's a system installation, you may
+need to talk to the person who installed it, or start poking around in
+your Python installation.
+
+
+Documentation
+-------------
+
+Python Doc strings are used as the primary reference for the
+NetWorkSpaces API.  You can access the online documentation using the
+Python help command.  For example, here's one way to view the
+documentation for the NetWorkSpace class:
+
+  % python
+  >>> from nws.client import NetWorkSpace
+  >>> help(NetWorkSpace)
+  Help on class NetWorkSpace in module nws.client:
+
+  class NetWorkSpace
+   |  Perform operations against work spaces on NWS servers.
+
+  [ snip ]
+
+There are HTML and text versions of the documentation in the doc
+directory of the source distribution, which were generated using the
+pydoc command.  There are examples and tutorials as well, so check
+those out to learn more about using NetWorkSpaces for Python.
+
+
+Python Babelfish
+----------------
+
+In order to examine the values that you've created from Python in a
+workspace using the server's web interface, you'll usually need to
+have the Python babelfish running.  The babelfish translates values
+into a human readable format so they can be displayed in a web
+browser.  If a value is a string, then the web interface simply
+displays the contents of the string, without any help from the
+babelfish, but if the value is any other type of Python object, it
+needs the help of the Python babelfish.
+
+The Python babelfish is named "pybabelfish", and is installed in the
+appropriate directory with the other Python and shell scripts,
+depending on your Python system and how you installed NetWorkSpaces
+for Python.  Assuming that the directory is in your PATH, you could
+execute the babelfish with the command:
+
+  % pybabelfish > babelfish.log 2>&1 &
+
+or, if you're using a csh compatible shell:
+
+  % pybabelfish >& babelfish.log &
+
+or, on Windows:
+
+  C:\> start pybabelfish
+
+If the NetWorkSpaces server isn't running on the local machine, the -h
+option can be used to specify the correct host name.  If the server
+isn't using the default port (8765), the -p option can be used to
+specify the correct port.
+
+For posix systems, there is also a version of the babelfish command
+called "pybabelfishd", which is the daemon version.  It must be
+executed as root, by default.  It automatically puts itself into the
+background, so it is simply run as:
+
+  # pybabelfishd
+
+The log file is created as /var/log/babelfish.log.  After it starts,
+pybabelfishd sets it's uid and gid to the "daemon" user.  The -h and
+-p options (as described above) are also supported.

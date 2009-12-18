@@ -1,0 +1,1333 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module nws.sleigh</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="nws.html"><font color="#ffffff">nws</font></a>.sleigh</strong></big></big> (version 1.6.3)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.6/dist-packages/nws/sleigh.py">/usr/lib/python2.6/dist-packages/nws/sleigh.py</a><br><a href="http://docs.python.org/library/nws.sleigh">Module Docs</a></font></td></tr></table>
+    <p><tt>Python&nbsp;API&nbsp;for&nbsp;parallel&nbsp;programming&nbsp;using&nbsp;NetWorkSpaces.<br>
+&nbsp;<br>
+The&nbsp;sleigh&nbsp;module,&nbsp;built&nbsp;on&nbsp;top&nbsp;of&nbsp;NetWorkSpaces&nbsp;(NWS),&nbsp;makes&nbsp;it&nbsp;very<br>
+easy&nbsp;to&nbsp;write&nbsp;simple&nbsp;parallel&nbsp;programs.&nbsp;&nbsp;It&nbsp;contains&nbsp;the&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;class,<br>
+which&nbsp;provides&nbsp;two&nbsp;basic&nbsp;methods&nbsp;for&nbsp;executing&nbsp;tasks&nbsp;in&nbsp;parallel:<br>
+eachElem&nbsp;and&nbsp;eachWorker.<br>
+&nbsp;<br>
+eachElem&nbsp;is&nbsp;used&nbsp;to&nbsp;execute&nbsp;a&nbsp;specified&nbsp;function&nbsp;multiple&nbsp;times&nbsp;in<br>
+parallel&nbsp;with&nbsp;a&nbsp;varying&nbsp;set&nbsp;of&nbsp;arguments.&nbsp;&nbsp;eachWorker&nbsp;is&nbsp;used&nbsp;to&nbsp;execute<br>
+a&nbsp;function&nbsp;exactly&nbsp;once&nbsp;on&nbsp;every&nbsp;worker&nbsp;in&nbsp;the&nbsp;sleigh&nbsp;with&nbsp;a&nbsp;fixed&nbsp;set<br>
+of&nbsp;arguments.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+First&nbsp;start&nbsp;up&nbsp;the&nbsp;NWS&nbsp;server,&nbsp;using&nbsp;the&nbsp;twistd&nbsp;command:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;twistd&nbsp;-y&nbsp;/etc/nws.tac<br>
+&nbsp;<br>
+Now&nbsp;you&nbsp;can&nbsp;create&nbsp;a&nbsp;sleigh&nbsp;to&nbsp;execute&nbsp;python&nbsp;code&nbsp;in&nbsp;parallel:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;python<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.sleigh&nbsp;import&nbsp;<a href="#Sleigh">Sleigh</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;<a href="#Sleigh">Sleigh</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;math<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;result&nbsp;=&nbsp;s.eachElem(math.exp,&nbsp;range(10))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;"The&nbsp;answer&nbsp;is",&nbsp;result</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cPickle.html">cPickle</a><br>
+<a href="copy_reg.html">copy_reg</a><br>
+<a href="new.html">new</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+<a href="platform.html">platform</a><br>
+<a href="random.html">random</a><br>
+<a href="socket.html">socket</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+<a href="subprocess.html">subprocess</a><br>
+<a href="sys.html">sys</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="traceback.html">traceback</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.sleigh.html#Sleigh">Sleigh</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighPending">SleighPending</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighResultIterator">SleighResultIterator</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighException">SleighException</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighGatheredException">SleighGatheredException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighIllegalValueException">SleighIllegalValueException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighJoinException">SleighJoinException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighNotAllowedException">SleighNotAllowedException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighNwsException">SleighNwsException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighOccupiedException">SleighOccupiedException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighScriptException">SleighScriptException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighStoppedException">SleighStoppedException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.sleigh.html#SleighTaskException">SleighTaskException</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Sleigh">class <strong>Sleigh</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;a&nbsp;collection&nbsp;of&nbsp;python&nbsp;processes&nbsp;used&nbsp;to&nbsp;execute&nbsp;tasks.<br>
+&nbsp;<br>
+The&nbsp;sleigh&nbsp;allows&nbsp;python&nbsp;functions,&nbsp;methods,&nbsp;and&nbsp;expressions&nbsp;to&nbsp;be<br>
+executed&nbsp;in&nbsp;parallel&nbsp;using&nbsp;the&nbsp;eachElem&nbsp;and&nbsp;eachWorker&nbsp;methods.<br>
+&nbsp;<br>
+The&nbsp;sleigh&nbsp;workers&nbsp;are&nbsp;started&nbsp;when&nbsp;the&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is<br>
+constructed.&nbsp;&nbsp;When&nbsp;tasks&nbsp;are&nbsp;submitted&nbsp;to&nbsp;the&nbsp;sleigh,&nbsp;using&nbsp;the<br>
+eachWorker&nbsp;and&nbsp;eachElem&nbsp;methods,&nbsp;the&nbsp;workers&nbsp;will&nbsp;execute&nbsp;the&nbsp;tasks,<br>
+and&nbsp;return&nbsp;the&nbsp;results.&nbsp;&nbsp;When&nbsp;the&nbsp;stop&nbsp;method&nbsp;is&nbsp;called,&nbsp;the&nbsp;workers<br>
+are&nbsp;stopped.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;a&nbsp;given&nbsp;python&nbsp;program&nbsp;can&nbsp;create&nbsp;multiple&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;objects,<br>
+which&nbsp;will&nbsp;each&nbsp;have&nbsp;it's&nbsp;own&nbsp;set&nbsp;of&nbsp;workers.&nbsp;&nbsp;This&nbsp;could&nbsp;be&nbsp;useful<br>
+if&nbsp;tasks&nbsp;have&nbsp;different&nbsp;requirements.&nbsp;&nbsp;For&nbsp;example,&nbsp;you&nbsp;could&nbsp;create<br>
+a&nbsp;Linux&nbsp;sleigh&nbsp;and&nbsp;a&nbsp;Windows&nbsp;sleigh,&nbsp;and&nbsp;submit&nbsp;Excel&nbsp;tasks&nbsp;only&nbsp;to<br>
+your&nbsp;Windows&nbsp;sleigh.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Sleigh-__init__"><strong>__init__</strong></a>(self, *deprecated, **kw)</dt><dd><tt>Start&nbsp;the&nbsp;remote&nbsp;python&nbsp;processes&nbsp;used&nbsp;to&nbsp;execute&nbsp;tasks.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+&nbsp;<br>
+launch&nbsp;--&nbsp;Specifies&nbsp;the&nbsp;method&nbsp;of&nbsp;starting&nbsp;workers.&nbsp;&nbsp;If&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;is&nbsp;set&nbsp;to&nbsp;the&nbsp;string&nbsp;'local',&nbsp;then&nbsp;the&nbsp;workers<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;executed&nbsp;on&nbsp;the&nbsp;local&nbsp;machine.&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;set&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;'web',&nbsp;then&nbsp;web&nbsp;launching&nbsp;is&nbsp;used.&nbsp;&nbsp;Otherwise,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;launch&nbsp;argument&nbsp;must&nbsp;specify&nbsp;a&nbsp;function&nbsp;(such&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nws.sleigh.sshcmd)&nbsp;that&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;command<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;use&nbsp;to&nbsp;execute&nbsp;the&nbsp;workers&nbsp;on&nbsp;the&nbsp;machines<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;by&nbsp;the&nbsp;nodeList&nbsp;argument.&nbsp;&nbsp;The&nbsp;default&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;'local'.<br>
+&nbsp;<br>
+workerCount&nbsp;--&nbsp;Number&nbsp;of&nbsp;workers&nbsp;to&nbsp;start&nbsp;if&nbsp;the&nbsp;launch&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;set&nbsp;to&nbsp;'local'&nbsp;(which&nbsp;is&nbsp;the&nbsp;default&nbsp;value&nbsp;of&nbsp;launch).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;argument&nbsp;is&nbsp;ignored&nbsp;if&nbsp;launch&nbsp;is&nbsp;not&nbsp;set&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'local'.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;3.<br>
+&nbsp;<br>
+nodeList&nbsp;--&nbsp;List&nbsp;of&nbsp;hosts&nbsp;on&nbsp;which&nbsp;to&nbsp;execute&nbsp;workers,&nbsp;if&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;launch&nbsp;argument&nbsp;is&nbsp;set&nbsp;to&nbsp;a&nbsp;function.&nbsp;&nbsp;This&nbsp;argument&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignored&nbsp;if&nbsp;launch&nbsp;is&nbsp;set&nbsp;to&nbsp;'local'&nbsp;or&nbsp;'web'.&nbsp;&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;value&nbsp;is&nbsp;['localhost',&nbsp;'localhost',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'localhost'].<br>
+&nbsp;<br>
+nwsHost&nbsp;--&nbsp;Host&nbsp;name&nbsp;of&nbsp;the&nbsp;machine&nbsp;where&nbsp;the&nbsp;NWS&nbsp;server&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executing.<br>
+&nbsp;<br>
+nwsPort&nbsp;--&nbsp;Port&nbsp;to&nbsp;connect&nbsp;to&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+nwsHostRemote&nbsp;--&nbsp;Host&nbsp;name&nbsp;of&nbsp;the&nbsp;machine&nbsp;that&nbsp;workers&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use&nbsp;to&nbsp;connect&nbsp;to&nbsp;the&nbsp;NWS&nbsp;server.&nbsp;&nbsp;This&nbsp;is&nbsp;useful&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conjunction&nbsp;with&nbsp;the&nbsp;sshforwardcmd&nbsp;function&nbsp;(see&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;of&nbsp;scriptExec).&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;the&nbsp;value&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;nwsHost&nbsp;argument.<br>
+&nbsp;<br>
+nwsPortRemote&nbsp;--&nbsp;Port&nbsp;that&nbsp;workers&nbsp;should&nbsp;use&nbsp;to&nbsp;connect&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NWS&nbsp;server.&nbsp;&nbsp;This&nbsp;is&nbsp;useful&nbsp;in&nbsp;conjunction&nbsp;with&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sshforwardcmd&nbsp;function&nbsp;(see&nbsp;the&nbsp;description&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scriptExec).&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;nwsPort<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument.<br>
+&nbsp;<br>
+scriptExec&nbsp;--&nbsp;Python&nbsp;function&nbsp;returning&nbsp;a&nbsp;list&nbsp;of&nbsp;command<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;to&nbsp;execute&nbsp;the&nbsp;worker&nbsp;script.&nbsp;&nbsp;This&nbsp;list&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command&nbsp;arguments&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;list&nbsp;returned&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;launch&nbsp;function.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;the&nbsp;envcmd<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;(defined&nbsp;in&nbsp;this&nbsp;module),&nbsp;which&nbsp;uses&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;standard&nbsp;'env'&nbsp;command&nbsp;to&nbsp;execute&nbsp;the&nbsp;script&nbsp;with&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appropriate&nbsp;environment&nbsp;for&nbsp;the&nbsp;worker.<br>
+&nbsp;<br>
+scriptDir&nbsp;--&nbsp;Directory&nbsp;on&nbsp;the&nbsp;worker&nbsp;that&nbsp;contains&nbsp;the&nbsp;execution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;script.<br>
+&nbsp;<br>
+scriptName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;script&nbsp;that&nbsp;executes&nbsp;the&nbsp;worker&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remote&nbsp;machines.&nbsp;&nbsp;This&nbsp;defaults&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PythonNWSSleighWorker.sh&nbsp;on&nbsp;Unix,&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PythonNWSSleighWorker.py&nbsp;on&nbsp;Windows.<br>
+&nbsp;<br>
+modulePath&nbsp;--&nbsp;Directory&nbsp;path&nbsp;to&nbsp;add&nbsp;to&nbsp;sys.path&nbsp;on&nbsp;workers.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;is&nbsp;often&nbsp;useful&nbsp;for&nbsp;giving&nbsp;the&nbsp;workers&nbsp;access&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;modules&nbsp;that&nbsp;define&nbsp;the&nbsp;python&nbsp;function&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executed&nbsp;by&nbsp;eachWorker&nbsp;or&nbsp;eachElem.&nbsp;&nbsp;The&nbsp;default&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;None.<br>
+&nbsp;<br>
+workingDir&nbsp;--&nbsp;Directory&nbsp;path&nbsp;to&nbsp;use&nbsp;as&nbsp;the&nbsp;current&nbsp;working<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;for&nbsp;the&nbsp;workers.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current&nbsp;working&nbsp;directory&nbsp;of&nbsp;the&nbsp;sleigh&nbsp;master.<br>
+&nbsp;<br>
+logDir&nbsp;--&nbsp;Directory&nbsp;in&nbsp;which&nbsp;to&nbsp;create&nbsp;the&nbsp;worker&nbsp;log&nbsp;files.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;None,&nbsp;which&nbsp;leaves&nbsp;the&nbsp;decision<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;sleigh&nbsp;worker&nbsp;scripts,&nbsp;which&nbsp;generally&nbsp;uses&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remote&nbsp;system's&nbsp;temporary&nbsp;directory.<br>
+&nbsp;<br>
+user&nbsp;--&nbsp;User&nbsp;name&nbsp;to&nbsp;use&nbsp;for&nbsp;remote&nbsp;execution&nbsp;of&nbsp;worker.&nbsp;&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;may&nbsp;be&nbsp;ignored,&nbsp;depending&nbsp;the&nbsp;specified<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;launch&nbsp;function.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;None,&nbsp;which&nbsp;allows&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remote&nbsp;execution&nbsp;mechanism&nbsp;decide.<br>
+&nbsp;<br>
+wsNameTemplate&nbsp;--&nbsp;Template&nbsp;for&nbsp;the&nbsp;sleigh&nbsp;workspace&nbsp;name.&nbsp;&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;a&nbsp;legal&nbsp;'format'&nbsp;string,&nbsp;containing&nbsp;only&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer&nbsp;format&nbsp;specifier.&nbsp;&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sleigh_ride_%04d'.<br>
+&nbsp;<br>
+userWsNameTemplate&nbsp;--&nbsp;Template&nbsp;for&nbsp;the&nbsp;user's&nbsp;workspace&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;must&nbsp;be&nbsp;a&nbsp;legal&nbsp;'format'&nbsp;string,&nbsp;containing&nbsp;only<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an&nbsp;integer&nbsp;format&nbsp;specifier.&nbsp;&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sleigh_user_%04d'.<br>
+&nbsp;<br>
+verbose&nbsp;--&nbsp;Boolean&nbsp;flag&nbsp;used&nbsp;for&nbsp;displaying&nbsp;debug&nbsp;messages.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug&nbsp;messages&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;stderr.&nbsp;&nbsp;This&nbsp;will&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cause&nbsp;the&nbsp;worker&nbsp;processes&nbsp;to&nbsp;write&nbsp;debug&nbsp;messages&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files&nbsp;prefixed&nbsp;with&nbsp;'sleigh_ride'&nbsp;in&nbsp;their&nbsp;current<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;working&nbsp;directory&nbsp;(as&nbsp;controled&nbsp;by&nbsp;the&nbsp;workerDir<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument).&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;False.<br>
+&nbsp;<br>
+redirectOutput&nbsp;--&nbsp;Boolean&nbsp;flag&nbsp;used&nbsp;to&nbsp;control&nbsp;whether&nbsp;messages<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;written&nbsp;by&nbsp;the&nbsp;worker&nbsp;functions&nbsp;to&nbsp;stdout&nbsp;and&nbsp;stderr<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;redirected&nbsp;to&nbsp;a&nbsp;workspace&nbsp;variable.&nbsp;&nbsp;If&nbsp;False,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;they&nbsp;will&nbsp;go&nbsp;to&nbsp;the&nbsp;output&nbsp;file&nbsp;if&nbsp;verbose&nbsp;is&nbsp;True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise&nbsp;to&nbsp;the&nbsp;null&nbsp;device.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;True.</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Sleigh-eachElem"><strong>eachElem</strong></a>(self, fun, elementArgs<font color="#909090">=[[]]</font>, fixedArgs<font color="#909090">=[]</font>, **kw)</dt><dd><tt>Execute&nbsp;a&nbsp;function,&nbsp;method,&nbsp;or&nbsp;expression&nbsp;for&nbsp;each&nbsp;element&nbsp;in<br>
+the&nbsp;specified&nbsp;list(s).<br>
+&nbsp;<br>
+s.<a href="#Sleigh-eachElem">eachElem</a>(fun,&nbsp;elementArgs[,&nbsp;fixedArgs])&nbsp;-&gt;&nbsp;list&nbsp;or&nbsp;<a href="#SleighPending">SleighPending</a><br>
+&nbsp;<br>
+The&nbsp;results&nbsp;are&nbsp;normally&nbsp;returned&nbsp;as&nbsp;a&nbsp;list,&nbsp;unless&nbsp;the&nbsp;blocking<br>
+arguments&nbsp;is&nbsp;set&nbsp;to&nbsp;False,&nbsp;in&nbsp;which&nbsp;case,&nbsp;a&nbsp;<a href="#SleighPending">SleighPending</a>&nbsp;<a href="__builtin__.html#object">object</a><br>
+is&nbsp;returned.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+fun&nbsp;--&nbsp;Function,&nbsp;method,&nbsp;or&nbsp;python&nbsp;expression&nbsp;to&nbsp;execute.&nbsp;&nbsp;To<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;execute&nbsp;a&nbsp;method,&nbsp;you&nbsp;must&nbsp;specify&nbsp;a&nbsp;bound&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;&nbsp;If&nbsp;the&nbsp;function&nbsp;or&nbsp;defining&nbsp;class&nbsp;is&nbsp;defined&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;module,&nbsp;the&nbsp;workers&nbsp;will&nbsp;attempt&nbsp;to&nbsp;import&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module.&nbsp;&nbsp;If&nbsp;that&nbsp;module&nbsp;isn't&nbsp;available&nbsp;to&nbsp;the&nbsp;worker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(because&nbsp;it's&nbsp;a&nbsp;non-standard&nbsp;module,&nbsp;not&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PYTHONPATH),&nbsp;then&nbsp;the&nbsp;worker&nbsp;is&nbsp;not&nbsp;be&nbsp;able&nbsp;to&nbsp;execute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;execute&nbsp;a&nbsp;python&nbsp;expression,&nbsp;you&nbsp;must&nbsp;specify&nbsp;it&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string.&nbsp;&nbsp;Leading&nbsp;whitespace&nbsp;is&nbsp;automatically&nbsp;stripped&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avoid&nbsp;a&nbsp;common&nbsp;source&nbsp;of&nbsp;python&nbsp;syntax&nbsp;errors.<br>
+&nbsp;<br>
+elementArgs&nbsp;--&nbsp;List&nbsp;of&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function&nbsp;or&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;need&nbsp;to&nbsp;be&nbsp;different&nbsp;for&nbsp;different&nbsp;tasks.&nbsp;&nbsp;In<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;general,&nbsp;this&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;iterable&nbsp;objects,&nbsp;such&nbsp;as&nbsp;lists,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;each&nbsp;containing&nbsp;the&nbsp;values&nbsp;to&nbsp;use&nbsp;for&nbsp;a&nbsp;given&nbsp;argument&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;different&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;your&nbsp;function&nbsp;needs&nbsp;only&nbsp;one&nbsp;varying&nbsp;argument&nbsp;of&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simple&nbsp;type,&nbsp;you&nbsp;can&nbsp;specify&nbsp;it&nbsp;without&nbsp;the&nbsp;outer&nbsp;list.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;for&nbsp;a&nbsp;python&nbsp;expression,&nbsp;the&nbsp;list&nbsp;of&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;expression&nbsp;as&nbsp;a&nbsp;global&nbsp;variable&nbsp;named<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'SleighArguments'.<br>
+&nbsp;<br>
+fixedArgs&nbsp;--&nbsp;List&nbsp;of&nbsp;additional&nbsp;arguments&nbsp;that&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed/constant&nbsp;for&nbsp;each&nbsp;task.&nbsp;&nbsp;Normally,&nbsp;they&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appended&nbsp;to&nbsp;the&nbsp;arguments&nbsp;specified&nbsp;by&nbsp;elementArgs,&nbsp;but<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;order&nbsp;can&nbsp;be&nbsp;altered&nbsp;using&nbsp;the&nbsp;argPermute&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;described&nbsp;below.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;an&nbsp;empty&nbsp;list,&nbsp;which&nbsp;means&nbsp;that&nbsp;no<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extra&nbsp;arguments&nbsp;are&nbsp;passed&nbsp;to&nbsp;the&nbsp;function.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;for&nbsp;a&nbsp;python&nbsp;expression,&nbsp;the&nbsp;list&nbsp;of&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;expression&nbsp;as&nbsp;a&nbsp;global&nbsp;variable&nbsp;named<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'SleighArguments'.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+&nbsp;<br>
+type&nbsp;--&nbsp;Indicates&nbsp;the&nbsp;type&nbsp;of&nbsp;function&nbsp;invocation&nbsp;to&nbsp;perform.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'invoke',&nbsp;'define',&nbsp;or&nbsp;'eval'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is&nbsp;a&nbsp;function&nbsp;or&nbsp;bound&nbsp;method,&nbsp;then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'invoke'.&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;string,&nbsp;then&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'eval'&nbsp;(a&nbsp;value&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'invoke'&nbsp;or&nbsp;'define'&nbsp;is&nbsp;illegal&nbsp;for&nbsp;python&nbsp;expressions).<br>
+&nbsp;<br>
+blocking&nbsp;--&nbsp;A&nbsp;boolean&nbsp;value&nbsp;that&nbsp;indicates&nbsp;whether&nbsp;to&nbsp;wait&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;results,&nbsp;or&nbsp;to&nbsp;return&nbsp;as&nbsp;soon&nbsp;as&nbsp;the&nbsp;tasks&nbsp;have&nbsp;been<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted.&nbsp;&nbsp;If&nbsp;set&nbsp;to&nbsp;False,&nbsp;eachElem&nbsp;will&nbsp;return&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#SleighPending">SleighPending</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;monitor&nbsp;the&nbsp;status<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;tasks,&nbsp;and&nbsp;to&nbsp;eventually&nbsp;retrieve&nbsp;the&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;must&nbsp;wait&nbsp;for&nbsp;the&nbsp;results&nbsp;to&nbsp;be&nbsp;complete&nbsp;before<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executing&nbsp;any&nbsp;further&nbsp;tasks&nbsp;on&nbsp;the&nbsp;sleigh,&nbsp;or&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#SleighOccupiedException">SleighOccupiedException</a>&nbsp;will&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;blocking&nbsp;is&nbsp;set&nbsp;to&nbsp;False,&nbsp;then&nbsp;the&nbsp;loadFactor<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;is&nbsp;disabled&nbsp;and&nbsp;ignored.&nbsp;&nbsp;Note&nbsp;that&nbsp;it's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unlikely&nbsp;that&nbsp;you'll&nbsp;need&nbsp;to&nbsp;turn&nbsp;off&nbsp;blocking&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eachElem.&nbsp;&nbsp;Non-blocking&nbsp;mode&nbsp;is&nbsp;more&nbsp;useful&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eachWorker.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;True.<br>
+&nbsp;<br>
+argPermute&nbsp;--&nbsp;List&nbsp;that&nbsp;maps&nbsp;the&nbsp;specified&nbsp;arguments&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actual&nbsp;arguments&nbsp;of&nbsp;the&nbsp;execution&nbsp;function.&nbsp;&nbsp;By<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"specified&nbsp;arguments",&nbsp;I&nbsp;mean&nbsp;the&nbsp;items&nbsp;extracted&nbsp;from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elementArgs,&nbsp;followed&nbsp;by&nbsp;fixedArgs.&nbsp;&nbsp;(Note&nbsp;that&nbsp;unless<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you&nbsp;are&nbsp;specifying&nbsp;both&nbsp;elementArgs&nbsp;and&nbsp;fixedArgs,&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;don't&nbsp;need&nbsp;to&nbsp;use&nbsp;argPermute.)&nbsp;&nbsp;The&nbsp;items&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;argPermute&nbsp;list&nbsp;are&nbsp;used&nbsp;as&nbsp;indexes&nbsp;into&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"specified&nbsp;arguments"&nbsp;list.&nbsp;&nbsp;The&nbsp;length&nbsp;of&nbsp;argPermute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;determines&nbsp;the&nbsp;number&nbsp;of&nbsp;arguments&nbsp;passed&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;execution&nbsp;function,&nbsp;which&nbsp;would&nbsp;normally&nbsp;be&nbsp;the&nbsp;length<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;specified&nbsp;arguments&nbsp;list,&nbsp;but&nbsp;this&nbsp;is&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required.&nbsp;&nbsp;For&nbsp;example,&nbsp;setting&nbsp;argPermute&nbsp;to&nbsp;an&nbsp;empty<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;would&nbsp;cause&nbsp;the&nbsp;execution&nbsp;function&nbsp;to&nbsp;be&nbsp;called<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without&nbsp;any&nbsp;arguments&nbsp;(although&nbsp;elementArgs&nbsp;would&nbsp;still<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;required,&nbsp;and&nbsp;would&nbsp;be&nbsp;used&nbsp;to&nbsp;determine&nbsp;the&nbsp;number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;tasks&nbsp;to&nbsp;execute).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;behaviour&nbsp;is&nbsp;to&nbsp;pass&nbsp;the&nbsp;execution&nbsp;function<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;arguments&nbsp;specified&nbsp;by&nbsp;elementArgs,&nbsp;followed&nbsp;by&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arguments&nbsp;from&nbsp;fixedArgs,&nbsp;which&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;setting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argPermute&nbsp;to:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;=&nbsp;len(elementArgs)&nbsp;+&nbsp;len(fixedArgs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argPermute&nbsp;=&nbsp;range(n)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;wished&nbsp;to&nbsp;reverse&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;arguments,&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;could&nbsp;then&nbsp;modify&nbsp;argPermute:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argPermute.reverse()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But,&nbsp;more&nbsp;realistically,&nbsp;you&nbsp;need&nbsp;to&nbsp;interleave&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed&nbsp;arguments&nbsp;with&nbsp;the&nbsp;varying&nbsp;arguments.&nbsp;&nbsp;For<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example,&nbsp;your&nbsp;execution&nbsp;function&nbsp;takes&nbsp;on&nbsp;fixed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument,&nbsp;followed&nbsp;by&nbsp;two&nbsp;that&nbsp;vary,&nbsp;you&nbsp;would&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argPermute&nbsp;to:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argPermute=[1,2,0]<br>
+&nbsp;<br>
+loadFactor&nbsp;--&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;tasks&nbsp;per&nbsp;worker&nbsp;to&nbsp;put&nbsp;into&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workspace&nbsp;at&nbsp;one&nbsp;time.&nbsp;&nbsp;This&nbsp;can&nbsp;become&nbsp;important&nbsp;if&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;executing&nbsp;a&nbsp;very&nbsp;large&nbsp;number&nbsp;of&nbsp;tasks.&nbsp;&nbsp;Setting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loadFactor&nbsp;to&nbsp;3&nbsp;will&nbsp;probably&nbsp;keep&nbsp;enough&nbsp;tasks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;available&nbsp;in&nbsp;the&nbsp;workspace&nbsp;to&nbsp;keep&nbsp;the&nbsp;workers&nbsp;busy,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without&nbsp;flooding&nbsp;the&nbsp;workspace&nbsp;and&nbsp;bogging&nbsp;down&nbsp;the&nbsp;NWS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;behaviour&nbsp;is&nbsp;to&nbsp;submit&nbsp;all&nbsp;of&nbsp;the&nbsp;tasks<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;the&nbsp;sleigh&nbsp;workspace&nbsp;immediately.<br>
+&nbsp;<br>
+accumulator&nbsp;--&nbsp;A&nbsp;function&nbsp;or&nbsp;callable&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;will&nbsp;be&nbsp;called<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;each&nbsp;result&nbsp;as&nbsp;they&nbsp;arrive.&nbsp;&nbsp;The&nbsp;first&nbsp;argument&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;function&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;result&nbsp;values,&nbsp;and&nbsp;the&nbsp;second<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;indexes,&nbsp;which&nbsp;identifies&nbsp;which&nbsp;task.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;arguments&nbsp;to&nbsp;the&nbsp;accumulator&nbsp;function&nbsp;are&nbsp;lists&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;future,&nbsp;we&nbsp;plan&nbsp;to&nbsp;allow&nbsp;tasks&nbsp;to&nbsp;be&nbsp;"chunked"&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;improve&nbsp;performance&nbsp;of&nbsp;small&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;bound&nbsp;methods&nbsp;can&nbsp;be&nbsp;very&nbsp;useful&nbsp;accumulators.</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-eachWorker"><strong>eachWorker</strong></a>(self, fun, *workerArgs, **kw)</dt><dd><tt>Execute&nbsp;a&nbsp;function,&nbsp;method,&nbsp;or&nbsp;expression&nbsp;on&nbsp;each&nbsp;worker&nbsp;of&nbsp;sleigh.<br>
+&nbsp;<br>
+s.<a href="#Sleigh-eachWorker">eachWorker</a>(fun[,&nbsp;...])&nbsp;-&gt;&nbsp;list&nbsp;or&nbsp;<a href="#SleighPending">SleighPending</a><br>
+&nbsp;<br>
+The&nbsp;results&nbsp;are&nbsp;normally&nbsp;returned&nbsp;as&nbsp;a&nbsp;list,&nbsp;unless<br>
+the&nbsp;blocking&nbsp;arguments&nbsp;is&nbsp;set&nbsp;to&nbsp;False,&nbsp;in&nbsp;which&nbsp;case,&nbsp;a<br>
+<a href="#SleighPending">SleighPending</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+fun&nbsp;--&nbsp;Function,&nbsp;method,&nbsp;or&nbsp;python&nbsp;expression&nbsp;to&nbsp;execute.&nbsp;&nbsp;To<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;execute&nbsp;a&nbsp;method,&nbsp;you&nbsp;must&nbsp;specify&nbsp;a&nbsp;bound&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;&nbsp;If&nbsp;the&nbsp;function&nbsp;or&nbsp;defining&nbsp;class&nbsp;is&nbsp;defined&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;module,&nbsp;the&nbsp;workers&nbsp;will&nbsp;attempt&nbsp;to&nbsp;import&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module.&nbsp;&nbsp;If&nbsp;that&nbsp;module&nbsp;isn't&nbsp;available&nbsp;to&nbsp;the&nbsp;worker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(because&nbsp;it's&nbsp;a&nbsp;non-standard&nbsp;module,&nbsp;not&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PYTHONPATH),&nbsp;then&nbsp;the&nbsp;worker&nbsp;is&nbsp;not&nbsp;be&nbsp;able&nbsp;to&nbsp;execute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;execute&nbsp;a&nbsp;python&nbsp;expression,&nbsp;you&nbsp;must&nbsp;specify&nbsp;it&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string.&nbsp;&nbsp;Leading&nbsp;whitespace&nbsp;is&nbsp;automatically&nbsp;stripped&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avoid&nbsp;a&nbsp;common&nbsp;source&nbsp;of&nbsp;python&nbsp;syntax&nbsp;errors.<br>
+&nbsp;<br>
+Optional&nbsp;arguments:<br>
+&nbsp;<br>
+*workerArgs&nbsp;--&nbsp;Arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function&nbsp;or&nbsp;method.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify&nbsp;whatever&nbsp;arguments&nbsp;the&nbsp;function&nbsp;requires,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;including&nbsp;no&nbsp;arguments.&nbsp;&nbsp;The&nbsp;exact&nbsp;same&nbsp;set&nbsp;of&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;each&nbsp;worker&nbsp;(unlike&nbsp;eachElem).&nbsp;&nbsp;For&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python&nbsp;expression,&nbsp;these&nbsp;arguments&nbsp;are&nbsp;passed&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expression&nbsp;as&nbsp;a&nbsp;global&nbsp;variable&nbsp;named&nbsp;'SleighArguments'.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+&nbsp;<br>
+type&nbsp;--&nbsp;Indicates&nbsp;the&nbsp;type&nbsp;of&nbsp;function&nbsp;invocation&nbsp;to&nbsp;perform.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'invoke',&nbsp;'define',&nbsp;or&nbsp;'eval'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is&nbsp;a&nbsp;function&nbsp;or&nbsp;bound&nbsp;method,&nbsp;then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'invoke'.&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;string,&nbsp;then&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'eval'&nbsp;(a&nbsp;value&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'invoke'&nbsp;or&nbsp;'define'&nbsp;is&nbsp;illegal&nbsp;for&nbsp;python&nbsp;expressions).<br>
+&nbsp;<br>
+blocking&nbsp;--&nbsp;A&nbsp;boolean&nbsp;value&nbsp;that&nbsp;indicates&nbsp;whether&nbsp;to&nbsp;wait&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;results,&nbsp;or&nbsp;to&nbsp;return&nbsp;as&nbsp;soon&nbsp;as&nbsp;the&nbsp;tasks&nbsp;have&nbsp;been<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;submitted.&nbsp;&nbsp;If&nbsp;set&nbsp;to&nbsp;False,&nbsp;eachWorker&nbsp;will&nbsp;return&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#SleighPending">SleighPending</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;monitor&nbsp;the&nbsp;status<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;tasks,&nbsp;and&nbsp;to&nbsp;eventually&nbsp;retrieve&nbsp;the&nbsp;results.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;must&nbsp;wait&nbsp;for&nbsp;the&nbsp;results&nbsp;to&nbsp;be&nbsp;complete&nbsp;before<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executing&nbsp;any&nbsp;further&nbsp;tasks&nbsp;on&nbsp;the&nbsp;sleigh,&nbsp;or&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#SleighOccupiedException">SleighOccupiedException</a>&nbsp;will&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;argument&nbsp;is&nbsp;important&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;master&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;able&nbsp;to&nbsp;interact/communicate&nbsp;with&nbsp;the&nbsp;workers,&nbsp;via&nbsp;NWS<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operations,&nbsp;for&nbsp;example.&nbsp;&nbsp;This&nbsp;allows&nbsp;you&nbsp;to&nbsp;implement<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;more&nbsp;complex&nbsp;parallel&nbsp;or&nbsp;distributed&nbsp;programs.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;True.<br>
+&nbsp;<br>
+accumulator&nbsp;--&nbsp;A&nbsp;function&nbsp;or&nbsp;callable&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;will&nbsp;be&nbsp;called<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;each&nbsp;result&nbsp;as&nbsp;they&nbsp;arrive.&nbsp;&nbsp;The&nbsp;first&nbsp;argument&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;function&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;result&nbsp;values,&nbsp;and&nbsp;the&nbsp;second<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;indexes,&nbsp;which&nbsp;identifies&nbsp;which&nbsp;task.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;arguments&nbsp;to&nbsp;the&nbsp;accumulator&nbsp;function&nbsp;are&nbsp;lists&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;future,&nbsp;we&nbsp;plan&nbsp;to&nbsp;allow&nbsp;tasks&nbsp;to&nbsp;be&nbsp;"chunked"&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;improve&nbsp;performance&nbsp;of&nbsp;small&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;bound&nbsp;methods&nbsp;can&nbsp;be&nbsp;very&nbsp;useful&nbsp;accumulators.</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-imap"><strong>imap</strong></a>(self, fun, *iterables, **kw)</dt><dd><tt>Return&nbsp;an&nbsp;iterator&nbsp;whose&nbsp;values&nbsp;are&nbsp;returned&nbsp;from&nbsp;the&nbsp;function<br>
+evaluated&nbsp;with&nbsp;a&nbsp;argument&nbsp;tuple&nbsp;taken&nbsp;from&nbsp;the&nbsp;given&nbsp;iterable.<br>
+Stops&nbsp;when&nbsp;the&nbsp;shortest&nbsp;of&nbsp;the&nbsp;iterables&nbsp;is&nbsp;exhausted.<br>
+&nbsp;<br>
+s.<a href="#Sleigh-imap">imap</a>(fun,&nbsp;*iterables[,&nbsp;**kw])&nbsp;-&gt;&nbsp;<a href="#SleighResultIterator">SleighResultIterator</a><br>
+&nbsp;<br>
+This&nbsp;is&nbsp;intended&nbsp;to&nbsp;be&nbsp;very&nbsp;similar&nbsp;to&nbsp;the&nbsp;imap&nbsp;function<br>
+in&nbsp;the&nbsp;itertools&nbsp;module.&nbsp;&nbsp;Other&nbsp;than&nbsp;being&nbsp;a&nbsp;method,&nbsp;rather&nbsp;than<br>
+a&nbsp;function,&nbsp;this&nbsp;method&nbsp;takes&nbsp;additional,&nbsp;keyword&nbsp;arguments,&nbsp;and<br>
+the&nbsp;iterator&nbsp;that&nbsp;is&nbsp;returned&nbsp;has&nbsp;special&nbsp;methods&nbsp;and&nbsp;properties.<br>
+See&nbsp;the&nbsp;<a href="#SleighResultIterator">SleighResultIterator</a>&nbsp;documentation&nbsp;for&nbsp;more&nbsp;information.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+fun&nbsp;--&nbsp;Function,&nbsp;method,&nbsp;or&nbsp;python&nbsp;expression&nbsp;to&nbsp;execute.&nbsp;&nbsp;To<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;execute&nbsp;a&nbsp;method,&nbsp;you&nbsp;must&nbsp;specify&nbsp;a&nbsp;bound&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;&nbsp;If&nbsp;the&nbsp;function&nbsp;or&nbsp;defining&nbsp;class&nbsp;is&nbsp;defined&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;module,&nbsp;the&nbsp;workers&nbsp;will&nbsp;attempt&nbsp;to&nbsp;import&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module.&nbsp;&nbsp;If&nbsp;that&nbsp;module&nbsp;isn't&nbsp;available&nbsp;to&nbsp;the&nbsp;worker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(because&nbsp;it's&nbsp;a&nbsp;non-standard&nbsp;module,&nbsp;not&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PYTHONPATH),&nbsp;then&nbsp;the&nbsp;worker&nbsp;is&nbsp;not&nbsp;be&nbsp;able&nbsp;to&nbsp;execute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;execute&nbsp;a&nbsp;python&nbsp;expression,&nbsp;you&nbsp;must&nbsp;specify&nbsp;it&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string.&nbsp;&nbsp;Leading&nbsp;whitespace&nbsp;is&nbsp;automatically&nbsp;stripped&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avoid&nbsp;a&nbsp;common&nbsp;source&nbsp;of&nbsp;python&nbsp;syntax&nbsp;errors.<br>
+&nbsp;<br>
+&nbsp;<br>
+*iterables&nbsp;--&nbsp;One&nbsp;or&nbsp;more&nbsp;iterables,&nbsp;one&nbsp;for&nbsp;each&nbsp;argument&nbsp;needed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;the&nbsp;function.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+&nbsp;<br>
+type&nbsp;--&nbsp;Indicates&nbsp;the&nbsp;type&nbsp;of&nbsp;function&nbsp;invocation&nbsp;to&nbsp;perform.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'invoke',&nbsp;'define',&nbsp;or&nbsp;'eval'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is&nbsp;a&nbsp;function&nbsp;or&nbsp;bound&nbsp;method,&nbsp;then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'invoke'.&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;string,&nbsp;then&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'eval'&nbsp;(a&nbsp;value&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'invoke'&nbsp;or&nbsp;'define'&nbsp;is&nbsp;illegal&nbsp;for&nbsp;python&nbsp;expressions).<br>
+&nbsp;<br>
+loadFactor&nbsp;--&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;tasks&nbsp;per&nbsp;worker&nbsp;to&nbsp;put&nbsp;into&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workspace&nbsp;at&nbsp;one&nbsp;time.&nbsp;&nbsp;This&nbsp;can&nbsp;become&nbsp;important&nbsp;if&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;executing&nbsp;a&nbsp;very&nbsp;large&nbsp;number&nbsp;of&nbsp;tasks&nbsp;(and&nbsp;essential<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;submitting&nbsp;infinite&nbsp;tasks).&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;of&nbsp;10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;probably&nbsp;keep&nbsp;enough&nbsp;tasks&nbsp;available&nbsp;in&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;keep&nbsp;the&nbsp;workers&nbsp;busy,&nbsp;without&nbsp;flooding&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;bogging&nbsp;down&nbsp;the&nbsp;NWS&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-starmap"><strong>starmap</strong></a>(self, fun, iterable, **kw)</dt><dd><tt>Return&nbsp;an&nbsp;iterator&nbsp;whose&nbsp;values&nbsp;are&nbsp;returned&nbsp;from&nbsp;the&nbsp;function<br>
+evaluated&nbsp;with&nbsp;a&nbsp;argument&nbsp;tuple&nbsp;taken&nbsp;from&nbsp;the&nbsp;given&nbsp;iterable.<br>
+Stops&nbsp;when&nbsp;the&nbsp;shortest&nbsp;of&nbsp;the&nbsp;iterables&nbsp;is&nbsp;exhausted.<br>
+&nbsp;<br>
+s.<a href="#Sleigh-starmap">starmap</a>(fun,&nbsp;iterable[,&nbsp;**kw])&nbsp;-&gt;&nbsp;<a href="#SleighResultIterator">SleighResultIterator</a><br>
+&nbsp;<br>
+This&nbsp;is&nbsp;intended&nbsp;to&nbsp;be&nbsp;very&nbsp;similar&nbsp;to&nbsp;the&nbsp;starmap&nbsp;function<br>
+in&nbsp;the&nbsp;itertools&nbsp;module.&nbsp;&nbsp;Other&nbsp;than&nbsp;being&nbsp;a&nbsp;method,&nbsp;rather&nbsp;than<br>
+a&nbsp;function,&nbsp;this&nbsp;method&nbsp;takes&nbsp;additional,&nbsp;optional&nbsp;arguments,&nbsp;and<br>
+the&nbsp;iterator&nbsp;that&nbsp;is&nbsp;returned&nbsp;has&nbsp;special&nbsp;methods&nbsp;and&nbsp;properties.<br>
+See&nbsp;the&nbsp;<a href="#SleighResultIterator">SleighResultIterator</a>&nbsp;documentation&nbsp;for&nbsp;more&nbsp;information.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+fun&nbsp;--&nbsp;Function,&nbsp;method,&nbsp;or&nbsp;python&nbsp;expression&nbsp;to&nbsp;execute.&nbsp;&nbsp;To<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;execute&nbsp;a&nbsp;method,&nbsp;you&nbsp;must&nbsp;specify&nbsp;a&nbsp;bound&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;&nbsp;If&nbsp;the&nbsp;function&nbsp;or&nbsp;defining&nbsp;class&nbsp;is&nbsp;defined&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;module,&nbsp;the&nbsp;workers&nbsp;will&nbsp;attempt&nbsp;to&nbsp;import&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module.&nbsp;&nbsp;If&nbsp;that&nbsp;module&nbsp;isn't&nbsp;available&nbsp;to&nbsp;the&nbsp;worker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(because&nbsp;it's&nbsp;a&nbsp;non-standard&nbsp;module,&nbsp;not&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PYTHONPATH),&nbsp;then&nbsp;the&nbsp;worker&nbsp;is&nbsp;not&nbsp;be&nbsp;able&nbsp;to&nbsp;execute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;tasks.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;execute&nbsp;a&nbsp;python&nbsp;expression,&nbsp;you&nbsp;must&nbsp;specify&nbsp;it&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string.&nbsp;&nbsp;Leading&nbsp;whitespace&nbsp;is&nbsp;automatically&nbsp;stripped&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;avoid&nbsp;a&nbsp;common&nbsp;source&nbsp;of&nbsp;python&nbsp;syntax&nbsp;errors.<br>
+&nbsp;<br>
+&nbsp;<br>
+iterable&nbsp;--&nbsp;Returns&nbsp;argument&nbsp;tuples&nbsp;for&nbsp;the&nbsp;function.<br>
+&nbsp;<br>
+Keyword&nbsp;arguments:<br>
+&nbsp;<br>
+type&nbsp;--&nbsp;Indicates&nbsp;the&nbsp;type&nbsp;of&nbsp;function&nbsp;invocation&nbsp;to&nbsp;perform.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;either&nbsp;'invoke',&nbsp;'define',&nbsp;or&nbsp;'eval'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is&nbsp;a&nbsp;function&nbsp;or&nbsp;bound&nbsp;method,&nbsp;then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'invoke'.&nbsp;&nbsp;If&nbsp;the&nbsp;fun&nbsp;argument&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;string,&nbsp;then&nbsp;the&nbsp;default&nbsp;value&nbsp;is&nbsp;'eval'&nbsp;(a&nbsp;value&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'invoke'&nbsp;or&nbsp;'define'&nbsp;is&nbsp;illegal&nbsp;for&nbsp;python&nbsp;expressions).<br>
+&nbsp;<br>
+loadFactor&nbsp;--&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;tasks&nbsp;per&nbsp;worker&nbsp;to&nbsp;put&nbsp;into&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workspace&nbsp;at&nbsp;one&nbsp;time.&nbsp;&nbsp;This&nbsp;can&nbsp;become&nbsp;important&nbsp;if&nbsp;you<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;executing&nbsp;a&nbsp;very&nbsp;large&nbsp;number&nbsp;of&nbsp;tasks&nbsp;(and&nbsp;essential<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;submitting&nbsp;infinite&nbsp;tasks).&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;of&nbsp;10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;probably&nbsp;keep&nbsp;enough&nbsp;tasks&nbsp;available&nbsp;in&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;keep&nbsp;the&nbsp;workers&nbsp;busy,&nbsp;without&nbsp;flooding&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;bogging&nbsp;down&nbsp;the&nbsp;NWS&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-status"><strong>status</strong></a>(self, closeGroup<font color="#909090">=False</font>, timeout<font color="#909090">=0.0</font>)</dt><dd><tt>Return&nbsp;the&nbsp;status&nbsp;of&nbsp;the&nbsp;worker&nbsp;group.<br>
+&nbsp;<br>
+s.<a href="#Sleigh-status">status</a>(closeGroup,&nbsp;timeout)&nbsp;-&gt;&nbsp;numworkers,&nbsp;closed<br>
+&nbsp;<br>
+The&nbsp;status&nbsp;includes&nbsp;the&nbsp;number&nbsp;of&nbsp;workers&nbsp;that&nbsp;have&nbsp;joined&nbsp;the<br>
+group&nbsp;so&nbsp;far,&nbsp;and&nbsp;a&nbsp;flag&nbsp;that&nbsp;indicates&nbsp;whether&nbsp;the&nbsp;group&nbsp;has<br>
+been&nbsp;closed&nbsp;(meaning&nbsp;that&nbsp;no&nbsp;more&nbsp;workers&nbsp;can&nbsp;join).&nbsp;&nbsp;Normally,<br>
+the&nbsp;group&nbsp;is&nbsp;automatically&nbsp;closed&nbsp;when&nbsp;all&nbsp;the&nbsp;workers&nbsp;that&nbsp;were<br>
+listed&nbsp;in&nbsp;the&nbsp;constructor&nbsp;have&nbsp;joined.&nbsp;&nbsp;However,&nbsp;this&nbsp;method<br>
+allows&nbsp;you&nbsp;to&nbsp;force&nbsp;the&nbsp;group&nbsp;to&nbsp;close&nbsp;after&nbsp;the&nbsp;timeout<br>
+expires.&nbsp;&nbsp;This&nbsp;can&nbsp;be&nbsp;particularly&nbsp;useful&nbsp;if&nbsp;you&nbsp;are&nbsp;running<br>
+on&nbsp;a&nbsp;large&nbsp;number&nbsp;of&nbsp;nodes,&nbsp;and&nbsp;some&nbsp;of&nbsp;the&nbsp;nodes&nbsp;are&nbsp;slow&nbsp;or<br>
+unreliable.&nbsp;&nbsp;If&nbsp;some&nbsp;of&nbsp;the&nbsp;workers&nbsp;are&nbsp;never&nbsp;started,&nbsp;the&nbsp;group<br>
+will&nbsp;never&nbsp;close,&nbsp;and&nbsp;no&nbsp;tasks&nbsp;will&nbsp;ever&nbsp;execute.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+closeGroup&nbsp;--&nbsp;Boolean&nbsp;flag&nbsp;indicating&nbsp;whether&nbsp;to&nbsp;close&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group.&nbsp;&nbsp;If&nbsp;True,&nbsp;the&nbsp;group&nbsp;will&nbsp;be&nbsp;closed,&nbsp;after&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;timeout.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;False.<br>
+&nbsp;<br>
+timeout&nbsp;--&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;wait&nbsp;for&nbsp;the&nbsp;group&nbsp;to&nbsp;close<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;before&nbsp;returning.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;0.0.</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-stop"><strong>stop</strong></a>(self)</dt><dd><tt>Stop&nbsp;the&nbsp;remote&nbsp;processes&nbsp;and&nbsp;delete&nbsp;the&nbsp;sleigh&nbsp;workspace.<br>
+&nbsp;<br>
+s.<a href="#Sleigh-stop">stop</a>()</tt></dd></dl>
+
+<dl><dt><a name="Sleigh-workerInfo"><strong>workerInfo</strong></a>(self)</dt><dd><tt>Return&nbsp;information&nbsp;about&nbsp;the&nbsp;sleigh&nbsp;workers.<br>
+&nbsp;<br>
+This&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;dictionaries,&nbsp;one&nbsp;for&nbsp;each&nbsp;worker.<br>
+Note&nbsp;that&nbsp;if&nbsp;this&nbsp;is&nbsp;called&nbsp;before&nbsp;all&nbsp;of&nbsp;the&nbsp;workers&nbsp;have<br>
+"joined",&nbsp;then&nbsp;you&nbsp;may&nbsp;get&nbsp;a&nbsp;partial&nbsp;list.&nbsp;&nbsp;This&nbsp;can&nbsp;be<br>
+useful&nbsp;in&nbsp;conjunction&nbsp;with&nbsp;the&nbsp;status&nbsp;method.<br>
+&nbsp;<br>
+The&nbsp;keys&nbsp;in&nbsp;the&nbsp;dictionaries&nbsp;are:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"nws":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nws&nbsp;version&nbsp;used&nbsp;by&nbsp;the&nbsp;worker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"python":&nbsp;&nbsp;Python&nbsp;version&nbsp;used&nbsp;by&nbsp;the&nbsp;worker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"pid":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process&nbsp;id&nbsp;of&nbsp;the&nbsp;worker&nbsp;process<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"rank":&nbsp;&nbsp;&nbsp;&nbsp;worker&nbsp;rank&nbsp;(0&nbsp;to&nbsp;workerCount&nbsp;-&nbsp;1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"host":&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;worker&nbsp;machine&nbsp;(not&nbsp;necessarily&nbsp;the&nbsp;same&nbsp;as&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;value&nbsp;in&nbsp;nodeList)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"logfile":&nbsp;path&nbsp;of&nbsp;the&nbsp;log&nbsp;file&nbsp;on&nbsp;the&nbsp;worker&nbsp;machine<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"os":&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operating&nbsp;system&nbsp;of&nbsp;the&nbsp;worker&nbsp;machine</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighException">class <strong>SleighException</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;all&nbsp;exceptions&nbsp;raised&nbsp;by&nbsp;this&nbsp;module.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SleighException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighGatheredException">class <strong>SleighGatheredException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Results&nbsp;already&nbsp;gathered.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighGatheredException">SleighGatheredException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighGatheredException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighGatheredException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighGatheredException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighGatheredException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighGatheredException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighGatheredException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighGatheredException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighGatheredException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighGatheredException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighGatheredException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighGatheredException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighGatheredException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighGatheredException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighGatheredException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighGatheredException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighGatheredException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighGatheredException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighGatheredException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighIllegalValueException">class <strong>SleighIllegalValueException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Illegal&nbsp;value&nbsp;specified.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighIllegalValueException">SleighIllegalValueException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighIllegalValueException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighIllegalValueException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighIllegalValueException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighIllegalValueException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighIllegalValueException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighIllegalValueException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighIllegalValueException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighIllegalValueException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighIllegalValueException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighIllegalValueException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighIllegalValueException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighJoinException">class <strong>SleighJoinException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Too&nbsp;late&nbsp;to&nbsp;join&nbsp;worker&nbsp;group.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighJoinException">SleighJoinException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighJoinException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighJoinException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighJoinException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighJoinException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighJoinException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighJoinException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighJoinException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighJoinException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighJoinException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighJoinException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighJoinException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighJoinException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighJoinException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighJoinException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighJoinException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighJoinException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighJoinException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighJoinException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighNotAllowedException">class <strong>SleighNotAllowedException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Sleigh">Sleigh</a>&nbsp;construction&nbsp;not&nbsp;allowed.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighNotAllowedException">SleighNotAllowedException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighNotAllowedException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighNotAllowedException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNotAllowedException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighNotAllowedException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighNotAllowedException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNotAllowedException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNotAllowedException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNotAllowedException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNotAllowedException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNotAllowedException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighNotAllowedException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighNwsException">class <strong>SleighNwsException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Error&nbsp;performing&nbsp;NWS&nbsp;operation.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighNwsException">SleighNwsException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighNwsException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighNwsException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighNwsException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNwsException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighNwsException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighNwsException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNwsException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighNwsException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNwsException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighNwsException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNwsException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighNwsException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNwsException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighNwsException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighNwsException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighNwsException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighNwsException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighNwsException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighOccupiedException">class <strong>SleighOccupiedException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Sleigh">Sleigh</a>&nbsp;is&nbsp;occupied.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighOccupiedException">SleighOccupiedException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighOccupiedException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighOccupiedException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighOccupiedException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighOccupiedException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighOccupiedException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighOccupiedException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighOccupiedException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighOccupiedException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighOccupiedException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighOccupiedException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighOccupiedException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighOccupiedException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighOccupiedException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighOccupiedException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighOccupiedException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighOccupiedException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighOccupiedException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighOccupiedException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighPending">class <strong>SleighPending</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;a&nbsp;sleigh&nbsp;eachWorker/eachElem&nbsp;invocation&nbsp;in&nbsp;progress.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;returned&nbsp;from&nbsp;the&nbsp;eachElem&nbsp;and&nbsp;eachWorker&nbsp;operations<br>
+when&nbsp;executed&nbsp;asynchronously.&nbsp;&nbsp;It&nbsp;allows&nbsp;you&nbsp;to&nbsp;check&nbsp;for<br>
+the&nbsp;number&nbsp;of&nbsp;tasks&nbsp;left&nbsp;to&nbsp;be&nbsp;executed,&nbsp;and&nbsp;to&nbsp;wait&nbsp;for<br>
+the&nbsp;results&nbsp;of&nbsp;the&nbsp;operation&nbsp;to&nbsp;be&nbsp;returned.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SleighPending-__init__"><strong>__init__</strong></a>(self, nws, numTasks, barrierName, sleighState, accumulator)</dt><dd><tt>Create&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;represents&nbsp;the&nbsp;pending&nbsp;sleigh&nbsp;operation.<br>
+&nbsp;<br>
+This&nbsp;constructor&nbsp;is&nbsp;intended&nbsp;for&nbsp;internal&nbsp;use&nbsp;only.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+nws&nbsp;--&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;NetWorkSpace&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+numTasks&nbsp;--&nbsp;Number&nbsp;of&nbsp;tasks&nbsp;that&nbsp;were&nbsp;submitted.<br>
+&nbsp;<br>
+barrierName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;barrier&nbsp;to&nbsp;wait&nbsp;at&nbsp;when&nbsp;complete.<br>
+&nbsp;<br>
+sleighState&nbsp;--&nbsp;Object&nbsp;representing&nbsp;the&nbsp;current&nbsp;state&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sleigh.<br>
+&nbsp;<br>
+accumulator&nbsp;--&nbsp;Function&nbsp;to&nbsp;call&nbsp;with&nbsp;results&nbsp;as&nbsp;they&nbsp;arrive.</tt></dd></dl>
+
+<dl><dt><a name="SleighPending-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighPending-check"><strong>check</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;tasks&nbsp;still&nbsp;outstanding.<br>
+&nbsp;<br>
+p.<a href="#SleighPending-check">check</a>()&nbsp;-&gt;&nbsp;integer</tt></dd></dl>
+
+<dl><dt><a name="SleighPending-wait"><strong>wait</strong></a>(self)</dt><dd><tt>Wait&nbsp;for&nbsp;and&nbsp;return&nbsp;the&nbsp;list&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+p.<a href="#SleighPending-wait">wait</a>()&nbsp;-&gt;&nbsp;list</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighResultIterator">class <strong>SleighResultIterator</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Returns&nbsp;results&nbsp;from&nbsp;tasks&nbsp;submitted&nbsp;to&nbsp;the&nbsp;sleigh.<br>
+&nbsp;<br>
+Instances&nbsp;of&nbsp;this&nbsp;class&nbsp;are&nbsp;returned&nbsp;from&nbsp;the&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;imap,&nbsp;and<br>
+starmap&nbsp;methods.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SleighResultIterator-__init__"><strong>__init__</strong></a>(self, task, taskIter, starIter, nws, numSubmitted, sleighState)</dt><dd><tt>Create&nbsp;an&nbsp;iterator&nbsp;over&nbsp;the&nbsp;task&nbsp;results.<br>
+&nbsp;<br>
+This&nbsp;constructor&nbsp;is&nbsp;intended&nbsp;for&nbsp;internal&nbsp;use&nbsp;only.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+task&nbsp;--&nbsp;Partially&nbsp;initialized&nbsp;Task&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+taskIter&nbsp;--&nbsp;Iterator&nbsp;over&nbsp;the&nbsp;task&nbsp;arguments.<br>
+&nbsp;<br>
+starIter&nbsp;--&nbsp;Is&nbsp;this&nbsp;a&nbsp;"star"&nbsp;iteration?<br>
+&nbsp;<br>
+nws&nbsp;--&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;NetWorkSpace&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+numSubmitted&nbsp;--&nbsp;Number&nbsp;of&nbsp;tasks&nbsp;already&nbsp;submitted.<br>
+&nbsp;<br>
+sleighState&nbsp;--&nbsp;Part&nbsp;of&nbsp;the&nbsp;<a href="#Sleigh">Sleigh</a>&nbsp;objects&nbsp;internal&nbsp;state.</tt></dd></dl>
+
+<dl><dt><a name="SleighResultIterator-__iter__"><strong>__iter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighResultIterator-next"><strong>next</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighResultIterator-shutdown"><strong>shutdown</strong></a>(self)</dt><dd><tt>Stop&nbsp;submitting&nbsp;tasks&nbsp;from&nbsp;the&nbsp;iterator.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;a&nbsp;less&nbsp;drastic&nbsp;version&nbsp;of&nbsp;"stop".&nbsp;&nbsp;It&nbsp;is&nbsp;expected<br>
+that&nbsp;you&nbsp;will&nbsp;keep&nbsp;retrieving&nbsp;results&nbsp;that&nbsp;have&nbsp;already&nbsp;been<br>
+submitted,&nbsp;but&nbsp;no&nbsp;new&nbsp;tasks&nbsp;will&nbsp;be&nbsp;submitted,&nbsp;regardless&nbsp;of<br>
+what&nbsp;tasks&nbsp;were&nbsp;originally&nbsp;specified&nbsp;to&nbsp;imap&nbsp;or&nbsp;starmap.&nbsp;&nbsp;The<br>
+sleigh&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;continue&nbsp;to&nbsp;be&nbsp;"occupied"&nbsp;until&nbsp;all&nbsp;results&nbsp;of<br>
+the&nbsp;pending&nbsp;tasks&nbsp;have&nbsp;been&nbsp;retreived.</tt></dd></dl>
+
+<dl><dt><a name="SleighResultIterator-stop"><strong>stop</strong></a>(self)</dt><dd><tt>Stop&nbsp;the&nbsp;iterator,&nbsp;flushing&nbsp;any&nbsp;pending&nbsp;results.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;useful&nbsp;if&nbsp;you're&nbsp;done&nbsp;with&nbsp;the&nbsp;iterator,&nbsp;and<br>
+don't&nbsp;want&nbsp;to&nbsp;retrieve&nbsp;anymore&nbsp;results.&nbsp;&nbsp;After&nbsp;calling&nbsp;stop,<br>
+you&nbsp;can&nbsp;submit&nbsp;more&nbsp;tasks&nbsp;to&nbsp;the&nbsp;sleigh&nbsp;(that&nbsp;is,&nbsp;it&nbsp;will<br>
+no&nbsp;longer&nbsp;be&nbsp;"occupied".</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>buffered</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;buffered&nbsp;task&nbsp;results.</tt></dd>
+</dl>
+<dl><dt><strong>returned</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;task&nbsp;results&nbsp;returned.</tt></dd>
+</dl>
+<dl><dt><strong>stopped</strong></dt>
+<dd><tt>Is&nbsp;the&nbsp;iterator&nbsp;stopped?</tt></dd>
+</dl>
+<dl><dt><strong>submitted</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;submitted&nbsp;tasks.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighScriptException">class <strong>SleighScriptException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Unable&nbsp;to&nbsp;find&nbsp;sleigh&nbsp;worker&nbsp;script.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighScriptException">SleighScriptException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighScriptException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighScriptException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighScriptException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighScriptException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighScriptException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighScriptException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighScriptException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighScriptException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighScriptException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighScriptException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighScriptException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighScriptException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighScriptException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighScriptException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighScriptException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighScriptException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighScriptException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighScriptException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighStoppedException">class <strong>SleighStoppedException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Sleigh">Sleigh</a>&nbsp;is&nbsp;stopped.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighStoppedException">SleighStoppedException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighStoppedException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighStoppedException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighStoppedException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighStoppedException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighStoppedException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighStoppedException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighStoppedException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighStoppedException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighStoppedException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighStoppedException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighStoppedException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighStoppedException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighStoppedException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighStoppedException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighStoppedException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighStoppedException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighStoppedException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighStoppedException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SleighTaskException">class <strong>SleighTaskException</strong></a>(<a href="nws.sleigh.html#SleighException">SleighException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Error&nbsp;executing&nbsp;a&nbsp;task.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.sleigh.html#SleighTaskException">SleighTaskException</a></dd>
+<dd><a href="nws.sleigh.html#SleighException">SleighException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><a name="SleighTaskException-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SleighTaskException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.sleigh.html#SleighException">SleighException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="SleighTaskException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighTaskException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#SleighTaskException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SleighTaskException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighTaskException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighTaskException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighTaskException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SleighTaskException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighTaskException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SleighTaskException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighTaskException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SleighTaskException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighTaskException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SleighTaskException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SleighTaskException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SleighTaskException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['Sleigh', 'SleighPending', 'SleighResultIterator', 'SleighException', 'SleighNwsException', 'SleighGatheredException', 'SleighStoppedException', 'SleighOccupiedException', 'SleighIllegalValueException', 'SleighScriptException', 'SleighTaskException', 'SleighJoinException', 'SleighNotAllowedException']<br>
+<strong>__version__</strong> = '1.6.3'</td></tr></table>
+</body></html>

@@ -1,0 +1,56 @@
+
+Requirements
+------------
+
+  Python 2.2 or later.
+
+  You'll want to have a NetWorkSpaces server installed and running on
+  some machine that you can connect to, but it doesn't need to be
+  installed on a client machine.
+
+
+Unix Installation (including Linux and Mac OS/X)
+------------------------------------------------
+
+  First, untar and build the distribution:
+
+      % tar xzvf python-nws-1.X.Y.tar.gz
+      % python setup.py build
+
+  You can do this as an unprivileged user, even if you plan to install
+  it as root.
+
+  Note that on Debian systems, you need to install the python-dev
+  package in order to install python source distributions.
+
+
+System Installation
+-------------------
+
+  To do a system wide installation, su to root, and execute the
+  following command:
+
+      # python setup.py install
+
+  This will add the nws python package to your python installation, and
+  copy several scripts to  a directory such as /usr/bin.  You should
+  make a note of what that directory is, so you can add it to your PATH
+  environment variable if necessary.
+
+
+Private Installation
+--------------------
+
+  To do a private installation, say into your home directory, you can
+  execute the following command:
+
+      % python setup.py install --home $HOME
+
+  This will copy the nws python package to the directory:
+
+      $HOME/lib/python
+
+  You may want to put this directory into your PYTHONPATH environment
+  variable so that python will be able to find it.
+
+  Several scripts will be copied to your $HOME/bin directory.

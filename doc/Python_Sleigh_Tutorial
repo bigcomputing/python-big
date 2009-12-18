@@ -1,0 +1,142 @@
+Python Sleigh Tutorial
+----------------------
+
+Sleigh is a python package, built on top of NWS, that makes it very easy to
+write simple parallel programs.  It provides two basic functions for
+executing tasks in parallel: eachElem and eachWorker.
+
+eachElem is used to execute a specified function multiple times in
+parallel with a varying set of arguments.
+
+eachWorker is used to execute a function exactly once on every worker in
+the sleigh with a fixed set of arguments.
+
+eachElem is all that is needed for most basic programs, so that is what
+we will start with.
+
+First, we need to start up a sleigh, so we'll import the sleigh module,
+and then construct a Sleigh object:
+
+>>> from nws.sleigh import Sleigh
+>>> s = Sleigh()
+
+This starts three sleigh workers on the local machine, but workers can
+be started on other machines by specifying a launch method and a list of
+machines.
+
+Let's shut down the sleigh so we can start workers on some other
+machines.
+
+>>> s.stop()
+
+This deletes the sleigh's NWS workspace, and shuts down all of the sleigh
+worker processes.
+
+Now we'll make a new sleigh, starting workers on node1 and node2 using
+the ssh command, and we'll use an NWS server that's running on node10:
+
+>>> from nws.sleigh import sshcmd
+>>> s = Sleigh(launch=sshcmd, nodeList=['node1', 'node2'], nwsHost='node10')
+
+If you're just starting to use NWS, the first method is very simple and
+convenient, and you don't have to worry about configuring ssh.
+Once you've got your NWS program written, and want to run it a network,
+you just change the way that you construct your Sleigh, and you're ready
+to run.
+
+If you're running on a machine that has multiple processors, then you
+can use the simpler method of constructing your Sleigh, but you'll
+probably want to control the number of workers that get started.  To do
+that, you use the workerCount option:
+
+>>> s = Sleigh(workerCount=8)
+
+There are more options, but that's more than enough to get you started.
+
+So now that we know how to create a sleigh, let actually run a parallel
+program.  Here's how we do it:
+
+>>> result = s.eachElem(abs, range(-10, 0))
+
+In that simple command, we have defined a set of data that is processed
+by multiple workers in parallel, and returned each of the results in a
+list.  (Of course, you would never really bother to do such a trivial
+amount of work with a parallel program, but you get the idea.)
+
+This eachElem command puts 10 tasks into the sleigh workspace.  Each
+task contains one value from -10 to -1.  This value is passed as the
+argument to the absolute value function.  The return value of the
+function is put into the sleigh workspace.  The eachElem command waits
+for all of the results to be put into the workspace, and returns them as
+a list, which are the numbers from 10 to 1.
+
+As a second example, let's add two lists together.  First, we'll define
+an add2 function, and then we'll use it with eachElem:
+
+>>> def add2(x, y): return x + y
+...
+>>> result = s.eachElem(add2, [range(10), range(10, 0, -1)])
+
+This is the parallel equivalent to the python command:
+
+>>> result = map(add2, range(10), range(10, 0, -1))
+
+We can keep adding more list arguments in this way, but there is also
+a way to add arguments that are the same for every task, which we call
+fixed arguments:
+
+>>> result = s.eachElem(add2, range(10), 20)
+
+This is equivalent to the python command:
+
+>>> result = map(add2, range(10), [20] * 10)
+
+The order of the arguments passed to the function are normally in the
+specified order, which means that the fixed arguments always come after
+the varying arguments.  To change this order, a permutation list can
+be specified.  The permutation list is specified using the "argPermute"
+keyword parameter.
+
+For example, to perform the parallel equivalent of the python operation
+"map(sub, [20]*20, range(20))", we do the following:
+
+>>> def sub(x, y): return x -  y
+...
+>>> result = s.eachElem(sub, range(20), 20, argPermute=[1,0])
+
+This permutation list says to first use the second argument, and then
+use the first, thus reversing the order of the two arguments.
+
+There is another keyword argument, called "blocking", which, if set to
+0, will make eachElem return immediately after submitting the tasks,
+thus making it non-blocking.  A "pending" object is returned, which can
+be used periodically to check how many of the tasks are complete, and
+also to wait until all tasks are finished.  Here's a quick example:
+
+>>> p = s.eachElem(add2, [range(20), range(20, 0, -1)], blocking=0)
+>>> while p.check() > 0:
+...     # Do something useful for a little while
+...     pass
+...
+>>> result = p.wait()
+
+There is also a keyword argument called "loadFactor" that enables
+watermarking.  This limits the number of tasks that are put into the
+workspace at the same time.  That could be important if you're executing
+a lot of tasks.  Setting the load factor to 3 limits the number of tasks
+in the workspace to 3 times the number of workers in the sleigh.  Here's
+how to do it:
+
+>>> result = s.eachElem(add2, [range(1000), range(1000)], loadFactor=3)
+
+The results are exactly the same as not using a load factor.  Setting
+this option only changes the way that tasks are submitted by the
+eachElem command.
+
+As you can see, Sleigh makes it easy to write simple parallel programs.
+But you're not limited to simple programs.  You can use NWS operations
+to communicate between the worker processes, allowing you to write
+message passing parallel programs much more easily than using MPI or
+PVM, for example.
+
+See the examples directory for more ideas on how to use Sleigh.

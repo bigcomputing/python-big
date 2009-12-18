@@ -1,0 +1,29 @@
+Metadata-Version: 1.0
+Name: python-big
+Version: 1.6.4
+Summary: Python NetWorkSpaces
+Home-page: http:///
+Author: REvolution Computing, Inc., Big Computing, Inc.
+Author-email: pat@bigcomputing.com
+License: GPL version 2 or later
+Description: NetWorkSpaces (NWS) is a system that makes it very easy
+        for different scripts and programs running (potentially) on
+        different machines to communicate and coordinate with one
+        another.
+        
+        The requirements for the NWS for Python are:
+        
+        Python 2.2 or later on Linux, Mac OS X, and other Unix systems.
+        Python 2.4 or later on Windows.
+Platform: any
+Classifier: Topic :: System :: Clustering
+Classifier: Topic :: System :: Distributed Computing
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: System Administrators
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Natural Language :: English

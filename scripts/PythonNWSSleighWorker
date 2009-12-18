@@ -1,0 +1,103 @@
+#!/bin/sh
+#
+# Copyright (c) 2005-2008, REvolution Computing, Inc.
+#
+# NetWorkSpaces is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+# USA
+#
+
+PythonProg=${PythonProg:-'python'}
+cd ${PythonSleighWorkingDir:-'/tmp'}
+LogDir=${PythonSleighLogDir:-'/tmp'}
+if [ -n "${PythonSleighWorkerOut}" ]; then
+    PythonSleighVerbose='1'
+    PythonSleighLogFile=${LogDir}/`basename "${PythonSleighWorkerOut}"`
+else
+    PythonSleighVerbose='0'
+    PythonSleighLogFile='/dev/null'
+fi
+export PythonSleighVerbose PythonSleighLogFile
+
+# compute engine
+$PythonProg <<'EOF' > ${PythonSleighLogFile} 2>&1 &
+
+import os, sys, signal
+
+# try to become a process group leader
+try: os.setpgid(0, 0)
+except: pass
+modulePath = os.environ.get('PythonSleighModulePath')
+if modulePath: sys.path[1:1] = modulePath.split(os.pathsep)
+from nws.sleigh import cmdLaunch
+
+def handler(sig, frame):
+    sys.exit(128 + sig)
+
+signal.signal(signal.SIGTERM, handler)
+
+cmdLaunch(int(os.environ.get('PythonSleighVerbose', '0')))
+
+EOF
+
+PythonCEPid=$!
+export PythonCEPid
+
+# sentinel
+USERID=`id -u`
+$PythonProg <<'EOF' > ${LogDir}/PythonSleighSentinelLog_${USERID}_${PythonSleighID} 2>&1 &
+
+import os, sys, signal, traceback, time
+modulePath = os.environ.get('PythonSleighModulePath')
+if modulePath: sys.path[1:1] = modulePath.split(os.pathsep)
+from nws.client import NetWorkSpace
+
+def handler(sig, frame):
+    sys.exit(128 + sig)
+
+signal.signal(signal.SIGTERM, handler)
+Env = os.environ
+
+nws = NetWorkSpace(Env['PythonSleighNwsName'], Env['PythonSleighNwsHost'],
+        int(Env['PythonSleighNwsPort']), useUse=True, create=False)
+
+print "waiting for sleigh to be stopped"
+
+try: 
+    nws.find('Sleigh ride over')
+    nws.store('bye', 1)
+except:
+    try: nws.store('bye', 101)
+    except: pass
+
+print "attempting to kill the worker process group"
+try:
+    # give the worker a chance to become process leader and set his
+    # signal handler
+    time.sleep(1)
+    os.kill(-int(os.environ['PythonCEPid']), signal.SIGTERM)
+except:
+    traceback.print_exc()
+
+print "sentinel returning"
+
+EOF
+
+SentinelPid=$!
+
+# wait for the sentinel process to exit,
+# and then make sure the worker process is dead
+wait $SentinelPid
+sleep 1  # give the worker a chance to set his signal handler
+kill $PythonCEPid 2> /dev/null

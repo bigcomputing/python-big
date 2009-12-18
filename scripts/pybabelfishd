@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+#
+# Copyright (c) 2005-2008, REvolution Computing, Inc.
+#
+# NetWorkSpaces is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+# USA
+#
+
+import sys, os, signal, time
+
+LOG_FILE = os.environ.get('BABELFISH_LOGFILE', '/var/log/babelfish.log')
+PID_FILE = os.environ.get('BABELFISH_PIDFILE', '/var/run/babelfish.pid')
+DAEMON_GID = 1
+DAEMON_UID = 1
+
+def handler(sig, frame):
+    sys.stderr.write("Python Babelfish Daemon exiting due to signal: %d\n" % sig)
+    sys.exit(128 + sig)
+
+# subclass of file that flushes after every write
+class AutoFlush(file):
+    def write(self, m):
+        s = file.write(self, m)
+        self.flush()
+        return s
+
+try:
+    f = AutoFlush(LOG_FILE, 'a+')
+except IOError, e:
+    print >> sys.stderr, "Error opening %s: %s" % (LOG_FILE, e.strerror)
+    sys.exit(1)
+
+sys.stdout = sys.stderr = f
+sys.stderr.write("Python Babelfish Daemon starting at: %s\n" % time.asctime())
+
+# close all file descriptors but our log file
+for i in xrange(128):
+    if i != f.fileno():
+        try:
+            os.close(i)
+        except:
+            pass
+
+os.chdir('/')
+pid = os.fork()
+if pid > 0:
+    os._exit(0)
+
+os.setsid()
+os.umask(0)
+
+pid = os.fork()
+if pid > 0:
+    os._exit(0)
+
+try:
+    p = open(PID_FILE, 'wb')
+except IOError, e:
+    sys.stderr.write("Error opening %s: %s\n" % (LOG_FILE, e.strerror))
+    sys.exit(1)
+
+p.write(str(os.getpid()))
+p.close()
+
+try:
+    os.setgid(DAEMON_GID)
+    os.setuid(DAEMON_UID)
+except OSError, e:
+    # if you can't, you don't need to
+    pass
+
+signal.signal(signal.SIGHUP, handler)
+signal.signal(signal.SIGQUIT, handler)
+signal.signal(signal.SIGTERM, handler)
+
+from nws.babelfish import main
+main(sys.argv[1:])
+
+sys.stderr.write("Python Babelfish Daemon shutting down at: %s\n" % time.asctime())

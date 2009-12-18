@@ -1,0 +1,1363 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module nws.client</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="nws.html"><font color="#ffffff">nws</font></a>.client</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.6/dist-packages/nws/client.py">/usr/lib/python2.6/dist-packages/nws/client.py</a><br><a href="http://docs.python.org/library/nws.client">Module Docs</a></font></td></tr></table>
+    <p><tt>Python&nbsp;API&nbsp;for&nbsp;performing&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;operations.<br>
+&nbsp;<br>
+NetWorkSpaces&nbsp;(NWS)&nbsp;is&nbsp;a&nbsp;powerful,&nbsp;open-source&nbsp;software&nbsp;package&nbsp;that<br>
+makes&nbsp;it&nbsp;easy&nbsp;to&nbsp;use&nbsp;clusters&nbsp;from&nbsp;within&nbsp;scripting&nbsp;languages&nbsp;like<br>
+Python,&nbsp;R,&nbsp;and&nbsp;Matlab.&nbsp;&nbsp;It&nbsp;uses&nbsp;a&nbsp;Space-based&nbsp;approach,&nbsp;similar&nbsp;to<br>
+JavaSpaces&nbsp;(TM)&nbsp;for&nbsp;example,&nbsp;that&nbsp;makes&nbsp;it&nbsp;easier&nbsp;to&nbsp;write&nbsp;distributed<br>
+applications.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+First&nbsp;start&nbsp;up&nbsp;the&nbsp;NWS&nbsp;server,&nbsp;using&nbsp;the&nbsp;twistd&nbsp;command:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;twistd&nbsp;-y&nbsp;/etc/nws.tac<br>
+&nbsp;<br>
+Now&nbsp;you&nbsp;can&nbsp;perform&nbsp;operations&nbsp;against&nbsp;it&nbsp;using&nbsp;this&nbsp;module:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;python<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.client&nbsp;import&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nws&nbsp;=&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>("test")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nws.store("answer",&nbsp;42)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;count&nbsp;=&nbsp;nws.fetch("answer")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;"The&nbsp;answer&nbsp;is",&nbsp;count</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cPickle.html">cPickle</a><br>
+<a href="errno.html">errno</a><br>
+</td><td width="25%" valign=top><a href="fcntl.html">fcntl</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="socket.html">socket</a><br>
+<a href="stat.html">stat</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.client.html#NetWorkSpace">NetWorkSpace</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsServer">NwsServer</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsValueIterator">NwsValueIterator</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.client.html#NwsException">NwsException</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.client.html#NwsOperationException">NwsOperationException</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.client.html#NwsDeclarationFailedException">NwsDeclarationFailedException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsNoWorkSpaceException">NwsNoWorkSpaceException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsPicklingException">NwsPicklingException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsUnpicklingException">NwsUnpicklingException</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="nws.client.html#NwsServerException">NwsServerException</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="nws.client.html#NwsConnectException">NwsConnectException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsConnectionDroppedException">NwsConnectionDroppedException</a>
+</font></dt><dt><font face="helvetica, arial"><a href="nws.client.html#NwsUnsupportedOperationException">NwsUnsupportedOperationException</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NetWorkSpace">class <strong>NetWorkSpace</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Perform&nbsp;operations&nbsp;against&nbsp;workspaces&nbsp;on&nbsp;NWS&nbsp;servers.<br>
+&nbsp;<br>
+The&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;the&nbsp;basic&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;used&nbsp;to&nbsp;perform<br>
+operatations&nbsp;on&nbsp;workspaces.&nbsp;&nbsp;Variables&nbsp;can&nbsp;be&nbsp;declared,&nbsp;created,<br>
+deleted,&nbsp;and&nbsp;the&nbsp;values&nbsp;of&nbsp;those&nbsp;variables&nbsp;can&nbsp;be&nbsp;manipulated.&nbsp;&nbsp;You<br>
+can&nbsp;think&nbsp;of&nbsp;a&nbsp;workspace&nbsp;as&nbsp;a&nbsp;network&nbsp;accessible&nbsp;python&nbsp;dictionary,<br>
+where&nbsp;the&nbsp;variable&nbsp;names&nbsp;are&nbsp;keys&nbsp;in&nbsp;the&nbsp;dictionary,&nbsp;and&nbsp;the<br>
+associated&nbsp;values&nbsp;are&nbsp;lists&nbsp;of&nbsp;pickled&nbsp;python&nbsp;objects.&nbsp;&nbsp;The&nbsp;store<br>
+method&nbsp;puts&nbsp;a&nbsp;value&nbsp;into&nbsp;the&nbsp;list&nbsp;associated&nbsp;with&nbsp;the&nbsp;specified<br>
+variable.&nbsp;&nbsp;The&nbsp;find&nbsp;method&nbsp;returns&nbsp;a&nbsp;single&nbsp;value&nbsp;from&nbsp;a&nbsp;list.<br>
+Which&nbsp;value&nbsp;it&nbsp;returns&nbsp;depends&nbsp;on&nbsp;the&nbsp;"mode"&nbsp;of&nbsp;the&nbsp;variable&nbsp;(see<br>
+the&nbsp;declare&nbsp;method&nbsp;for&nbsp;more&nbsp;information&nbsp;on&nbsp;the&nbsp;variable&nbsp;mode).&nbsp;&nbsp;If<br>
+the&nbsp;list&nbsp;is&nbsp;empty,&nbsp;the&nbsp;find&nbsp;method&nbsp;will&nbsp;not&nbsp;return&nbsp;until&nbsp;a&nbsp;value&nbsp;is<br>
+stored&nbsp;in&nbsp;that&nbsp;list.&nbsp;&nbsp;The&nbsp;findTry&nbsp;method&nbsp;works&nbsp;like&nbsp;the&nbsp;find&nbsp;method,<br>
+but&nbsp;doesn't&nbsp;wait,&nbsp;returning&nbsp;a&nbsp;default&nbsp;value&nbsp;instead&nbsp;(somewhat&nbsp;like<br>
+the&nbsp;dictionary's&nbsp;get&nbsp;method).&nbsp;&nbsp;The&nbsp;fetch&nbsp;method&nbsp;works&nbsp;like&nbsp;the&nbsp;find<br>
+method,&nbsp;but&nbsp;it&nbsp;will&nbsp;also&nbsp;remove&nbsp;the&nbsp;value&nbsp;from&nbsp;the&nbsp;list.&nbsp;&nbsp;If<br>
+multiple&nbsp;clients&nbsp;are&nbsp;all&nbsp;blocked&nbsp;on&nbsp;a&nbsp;fetch&nbsp;operation,&nbsp;and&nbsp;a&nbsp;value<br>
+is&nbsp;stored&nbsp;into&nbsp;that&nbsp;variable,&nbsp;the&nbsp;server&nbsp;guarantees&nbsp;that&nbsp;only&nbsp;one<br>
+client&nbsp;will&nbsp;be&nbsp;able&nbsp;to&nbsp;fetch&nbsp;that&nbsp;value.&nbsp;&nbsp;The&nbsp;fetchTry&nbsp;method,&nbsp;not<br>
+surprisingly,&nbsp;works&nbsp;like&nbsp;the&nbsp;fetch&nbsp;method,&nbsp;but&nbsp;doesn't&nbsp;wait,<br>
+returning&nbsp;a&nbsp;default&nbsp;value&nbsp;instead.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NetWorkSpace-__getstate__"><strong>__getstate__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NetWorkSpace-__init__"><strong>__init__</strong></a>(self, wsName<font color="#909090">='__default'</font>, serverHost<font color="#909090">='localhost'</font>, serverPort<font color="#909090">=8765</font>, useUse<font color="#909090">=False</font>, server<font color="#909090">=None</font>, **opt)</dt><dd><tt>Construct&nbsp;a&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;the&nbsp;specified&nbsp;<a href="#NwsServer">NwsServer</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+wsName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace.&nbsp;&nbsp;There&nbsp;can&nbsp;only&nbsp;be&nbsp;one<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workspace&nbsp;on&nbsp;the&nbsp;server&nbsp;with&nbsp;a&nbsp;given&nbsp;name,&nbsp;so&nbsp;two<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clients&nbsp;can&nbsp;easily&nbsp;communicate&nbsp;with&nbsp;each&nbsp;other&nbsp;by&nbsp;both<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creating&nbsp;a&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;the&nbsp;same&nbsp;name&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;same&nbsp;server.&nbsp;&nbsp;The&nbsp;first&nbsp;client&nbsp;that&nbsp;creates&nbsp;a&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;is&nbsp;willing&nbsp;to&nbsp;take&nbsp;ownership&nbsp;of&nbsp;it,&nbsp;will&nbsp;become&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner&nbsp;(see&nbsp;the&nbsp;description&nbsp;of&nbsp;the&nbsp;useUse&nbsp;argument&nbsp;below<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;more&nbsp;information&nbsp;on&nbsp;workspace&nbsp;ownership).<br>
+&nbsp;<br>
+serverHost&nbsp;--&nbsp;Host&nbsp;name&nbsp;of&nbsp;the&nbsp;NWS&nbsp;server.&nbsp;&nbsp;This&nbsp;argument&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignored&nbsp;if&nbsp;the&nbsp;server&nbsp;argument&nbsp;is&nbsp;not&nbsp;None.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;'localhost'.<br>
+&nbsp;<br>
+serverPort&nbsp;--&nbsp;Port&nbsp;of&nbsp;the&nbsp;NWS&nbsp;server.&nbsp;&nbsp;This&nbsp;argument&nbsp;is&nbsp;ignored<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;the&nbsp;server&nbsp;argument&nbsp;is&nbsp;not&nbsp;None.&nbsp;&nbsp;The&nbsp;default&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;8765.<br>
+&nbsp;<br>
+useUse&nbsp;--&nbsp;Boolean&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;you&nbsp;only&nbsp;want&nbsp;to&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;workspace,&nbsp;or&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;open&nbsp;it&nbsp;(which&nbsp;means<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you're&nbsp;willing&nbsp;to&nbsp;take&nbsp;ownership&nbsp;of&nbsp;it,&nbsp;if&nbsp;it's&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;already&nbsp;owned).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;False,&nbsp;meaning&nbsp;you&nbsp;are&nbsp;willing&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;take&nbsp;ownership&nbsp;of&nbsp;this&nbsp;workspace.<br>
+&nbsp;<br>
+server&nbsp;--&nbsp;<a href="#NwsServer">NwsServer</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;associate&nbsp;with&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;&nbsp;If<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;value&nbsp;is&nbsp;None&nbsp;(the&nbsp;default&nbsp;value),&nbsp;then&nbsp;a&nbsp;<a href="#NwsServer">NwsServer</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;be&nbsp;constructed,&nbsp;using&nbsp;the&nbsp;host&nbsp;and&nbsp;port<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;with&nbsp;the&nbsp;serverHost&nbsp;and&nbsp;serverPort&nbsp;arguments.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;None.<br>
+&nbsp;<br>
+Keyword&nbsp;Arguments:<br>
+&nbsp;<br>
+persistent&nbsp;--&nbsp;Boolean&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;persistent&nbsp;or&nbsp;not.&nbsp;&nbsp;If&nbsp;a&nbsp;workspace&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;persistent,&nbsp;it&nbsp;won't&nbsp;be&nbsp;purged&nbsp;when&nbsp;the&nbsp;owner<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disconnects&nbsp;from&nbsp;the&nbsp;NWS&nbsp;server.&nbsp;&nbsp;Note&nbsp;that&nbsp;only&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client&nbsp;who&nbsp;actually&nbsp;takes&nbsp;ownership&nbsp;of&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;make&nbsp;the&nbsp;workspace&nbsp;persistent.&nbsp;&nbsp;The&nbsp;persistent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;is&nbsp;effectively&nbsp;ignored&nbsp;if&nbsp;useUse&nbsp;is&nbsp;True,&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;client&nbsp;never&nbsp;becomes&nbsp;the&nbsp;owner&nbsp;of&nbsp;the&nbsp;workspace.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;useUse&nbsp;is&nbsp;False,&nbsp;it&nbsp;is&nbsp;the&nbsp;client&nbsp;who&nbsp;actually<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;becomes&nbsp;the&nbsp;owner&nbsp;that&nbsp;determines&nbsp;whether&nbsp;it&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;persistent&nbsp;or&nbsp;not.&nbsp;&nbsp;That&nbsp;is,&nbsp;after&nbsp;the&nbsp;workspace&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owned,&nbsp;the&nbsp;persistent&nbsp;argument&nbsp;is&nbsp;ignored.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;false.<br>
+&nbsp;<br>
+create&nbsp;--&nbsp;Boolean&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;workspace&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;created&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;already&nbsp;exist.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;true.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-__setstate__"><strong>__setstate__</strong></a>(self, d)</dt></dl>
+
+<dl><dt><a name="NetWorkSpace-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NetWorkSpace-currentWs"><strong>currentWs</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;current&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-currentWs">currentWs</a>()&nbsp;-&gt;&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-declare"><strong>declare</strong></a>(self, varName, mode)</dt><dd><tt>Declare&nbsp;a&nbsp;variable&nbsp;in&nbsp;a&nbsp;workspace&nbsp;with&nbsp;the&nbsp;specified&nbsp;mode.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-declare">declare</a>(varName,&nbsp;mode)<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;used&nbsp;to&nbsp;specify&nbsp;a&nbsp;mode&nbsp;other&nbsp;than&nbsp;the&nbsp;default<br>
+mode&nbsp;of&nbsp;'fifo'.&nbsp;&nbsp;Legal&nbsp;values&nbsp;for&nbsp;the&nbsp;mode&nbsp;are:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'fifo',&nbsp;'lifo',&nbsp;'multi',&nbsp;and&nbsp;'single'<br>
+&nbsp;<br>
+In&nbsp;the&nbsp;first&nbsp;three&nbsp;modes,&nbsp;multiple&nbsp;value&nbsp;can&nbsp;be&nbsp;stored&nbsp;in<br>
+a&nbsp;variable.&nbsp;&nbsp;If&nbsp;the&nbsp;mode&nbsp;is&nbsp;'fifo',&nbsp;then&nbsp;values&nbsp;are&nbsp;retrieved<br>
+in&nbsp;a&nbsp;"first-in,&nbsp;first-out"&nbsp;fashion.&nbsp;&nbsp;That&nbsp;is,&nbsp;the&nbsp;first&nbsp;value<br>
+stored,&nbsp;will&nbsp;be&nbsp;the&nbsp;first&nbsp;value&nbsp;fetched.&nbsp;&nbsp;If&nbsp;the&nbsp;mode&nbsp;is&nbsp;'lifo',<br>
+then&nbsp;values&nbsp;are&nbsp;retrieved&nbsp;in&nbsp;a&nbsp;"last-in,&nbsp;first-out"&nbsp;fashion,<br>
+as&nbsp;in&nbsp;a&nbsp;stack.&nbsp;&nbsp;If&nbsp;the&nbsp;mode&nbsp;is&nbsp;'multi',&nbsp;then&nbsp;the&nbsp;order&nbsp;of<br>
+retrieval&nbsp;is&nbsp;pseudorandom.<br>
+&nbsp;<br>
+The&nbsp;'single'&nbsp;mode&nbsp;means&nbsp;that&nbsp;only&nbsp;a&nbsp;single&nbsp;value&nbsp;can&nbsp;be<br>
+stored&nbsp;in&nbsp;the&nbsp;variable.&nbsp;&nbsp;Each&nbsp;new&nbsp;store&nbsp;operation&nbsp;will&nbsp;overwrite<br>
+the&nbsp;current&nbsp;value&nbsp;of&nbsp;the&nbsp;variable.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;variable&nbsp;is&nbsp;created&nbsp;using&nbsp;a&nbsp;store&nbsp;operation,&nbsp;then&nbsp;the<br>
+mode&nbsp;defaults&nbsp;to&nbsp;'fifo'.&nbsp;&nbsp;The&nbsp;mode&nbsp;cannot&nbsp;be&nbsp;changed&nbsp;with<br>
+subsequent&nbsp;calls&nbsp;to&nbsp;declare,&nbsp;regardless&nbsp;of&nbsp;whether&nbsp;the&nbsp;variable<br>
+was&nbsp;originally&nbsp;created&nbsp;using&nbsp;store&nbsp;or&nbsp;declare.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;declare.<br>
+&nbsp;<br>
+mode&nbsp;--&nbsp;Mode&nbsp;of&nbsp;the&nbsp;variable.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-deleteVar"><strong>deleteVar</strong></a>(self, varName)</dt><dd><tt>Delete&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-deleteVar">deleteVar</a>(varName)<br>
+&nbsp;<br>
+All&nbsp;values&nbsp;of&nbsp;the&nbsp;variable&nbsp;are&nbsp;destroyed,&nbsp;and&nbsp;all&nbsp;currently<br>
+blocking&nbsp;fetch&nbsp;and&nbsp;find&nbsp;operations&nbsp;will&nbsp;be&nbsp;aborted.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;delete.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-fetch"><strong>fetch</strong></a>(self, varName)</dt><dd><tt>Return&nbsp;and&nbsp;remove&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-fetch">fetch</a>(varName)&nbsp;-&gt;&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+If&nbsp;the&nbsp;variable&nbsp;has&nbsp;no&nbsp;values,&nbsp;the&nbsp;operation&nbsp;will&nbsp;not&nbsp;return<br>
+until&nbsp;it&nbsp;does.&nbsp;&nbsp;In&nbsp;other&nbsp;words,&nbsp;this&nbsp;is&nbsp;a&nbsp;"blocking"&nbsp;operation.<br>
+fetchTry&nbsp;is&nbsp;the&nbsp;"non-blocking"&nbsp;version&nbsp;of&nbsp;this&nbsp;method.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;if&nbsp;many&nbsp;clients&nbsp;are&nbsp;all&nbsp;trying&nbsp;to&nbsp;fetch&nbsp;from&nbsp;the&nbsp;same<br>
+variable,&nbsp;only&nbsp;one&nbsp;client&nbsp;can&nbsp;fetch&nbsp;a&nbsp;given&nbsp;value.&nbsp;&nbsp;Other<br>
+clients&nbsp;may&nbsp;have&nbsp;previously&nbsp;seen&nbsp;that&nbsp;value&nbsp;using&nbsp;the&nbsp;find&nbsp;or<br>
+findTry&nbsp;method,&nbsp;but&nbsp;only&nbsp;one&nbsp;client&nbsp;can&nbsp;ever&nbsp;fetch&nbsp;or&nbsp;fetchTry&nbsp;a<br>
+given&nbsp;value.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;fetch.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-fetchFile"><strong>fetchFile</strong></a>(self, varName, fobj)</dt><dd><tt>Return&nbsp;and&nbsp;remove&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-fetchFile">fetchFile</a>(varName,&nbsp;fobj)&nbsp;-&gt;&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written&nbsp;to&nbsp;file<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;fetch.<br>
+&nbsp;<br>
+fobj&nbsp;--&nbsp;File&nbsp;to&nbsp;write&nbsp;data&nbsp;to.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-fetchTry"><strong>fetchTry</strong></a>(self, varName, missing<font color="#909090">=None</font>)</dt><dd><tt>Try&nbsp;to&nbsp;return&nbsp;and&nbsp;remove&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-fetchTry">fetchTry</a>(varName[,&nbsp;missing])&nbsp;-&gt;&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+If&nbsp;the&nbsp;variable&nbsp;has&nbsp;no&nbsp;values,&nbsp;the&nbsp;operation&nbsp;will&nbsp;return<br>
+the&nbsp;value&nbsp;specified&nbsp;by&nbsp;"missing",&nbsp;which&nbsp;defaults&nbsp;to&nbsp;None.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;if&nbsp;many&nbsp;clients&nbsp;are&nbsp;all&nbsp;trying&nbsp;to&nbsp;fetchTry&nbsp;from&nbsp;the<br>
+same&nbsp;variable,&nbsp;only&nbsp;one&nbsp;client&nbsp;can&nbsp;fetchTry&nbsp;a&nbsp;given&nbsp;value.<br>
+Other&nbsp;clients&nbsp;may&nbsp;have&nbsp;previously&nbsp;seen&nbsp;that&nbsp;value&nbsp;using&nbsp;the&nbsp;find<br>
+or&nbsp;findTry&nbsp;method,&nbsp;but&nbsp;only&nbsp;one&nbsp;client&nbsp;can&nbsp;ever&nbsp;fetch&nbsp;or<br>
+fetchTry&nbsp;a&nbsp;given&nbsp;value.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;fetch.<br>
+&nbsp;<br>
+missing&nbsp;--&nbsp;Value&nbsp;to&nbsp;return&nbsp;if&nbsp;the&nbsp;variable&nbsp;has&nbsp;no&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-fetchTryFile"><strong>fetchTryFile</strong></a>(self, varName, fobj)</dt><dd><tt>Try&nbsp;to&nbsp;return&nbsp;and&nbsp;remove&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-fetchTryFile">fetchTryFile</a>(varName,&nbsp;fobj)&nbsp;-&gt;&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written&nbsp;to&nbsp;file<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;fetch.<br>
+&nbsp;<br>
+fobj&nbsp;--&nbsp;File&nbsp;to&nbsp;write&nbsp;data&nbsp;to.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-find"><strong>find</strong></a>(self, varName)</dt><dd><tt>Return&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-find">find</a>(varName)&nbsp;-&gt;&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+If&nbsp;the&nbsp;variable&nbsp;has&nbsp;no&nbsp;values,&nbsp;the&nbsp;operation&nbsp;will&nbsp;not&nbsp;return<br>
+until&nbsp;it&nbsp;does.&nbsp;&nbsp;In&nbsp;other&nbsp;words,&nbsp;this&nbsp;is&nbsp;a&nbsp;"blocking"&nbsp;operation.<br>
+findTry&nbsp;is&nbsp;the&nbsp;"non-blocking"&nbsp;version&nbsp;of&nbsp;this&nbsp;method.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;(unlike&nbsp;fetch)&nbsp;find&nbsp;does&nbsp;not&nbsp;remove&nbsp;the&nbsp;value.&nbsp;&nbsp;The<br>
+value&nbsp;remains&nbsp;in&nbsp;the&nbsp;variable.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;find.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-findFile"><strong>findFile</strong></a>(self, varName, fobj)</dt><dd><tt>Return&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;from&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-findFile">findFile</a>(varName,&nbsp;fobj)&nbsp;-&gt;&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written&nbsp;to&nbsp;file<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;find.<br>
+&nbsp;<br>
+fobj&nbsp;--&nbsp;File&nbsp;to&nbsp;write&nbsp;data&nbsp;to.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-findTry"><strong>findTry</strong></a>(self, varName, missing<font color="#909090">=None</font>)</dt><dd><tt>Try&nbsp;to&nbsp;return&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;in&nbsp;the&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-findTry">findTry</a>(varName[,&nbsp;missing])&nbsp;-&gt;&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+If&nbsp;the&nbsp;variable&nbsp;has&nbsp;no&nbsp;values,&nbsp;the&nbsp;operation&nbsp;will&nbsp;return<br>
+the&nbsp;value&nbsp;specified&nbsp;by&nbsp;"missing",&nbsp;which&nbsp;defaults&nbsp;to&nbsp;the&nbsp;value<br>
+"None".<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;(unlike&nbsp;fetchTry)&nbsp;findTry&nbsp;does&nbsp;not&nbsp;remove&nbsp;the&nbsp;value.<br>
+The&nbsp;value&nbsp;remains&nbsp;in&nbsp;the&nbsp;variable.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;use.<br>
+&nbsp;<br>
+missing&nbsp;--&nbsp;Value&nbsp;to&nbsp;return&nbsp;if&nbsp;the&nbsp;variable&nbsp;has&nbsp;no&nbsp;values.&nbsp;&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;is&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-findTryFile"><strong>findTryFile</strong></a>(self, varName, fobj)</dt><dd><tt>Try&nbsp;to&nbsp;return&nbsp;a&nbsp;value&nbsp;of&nbsp;a&nbsp;variable&nbsp;in&nbsp;the&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-findTryFile">findTryFile</a>(varName,&nbsp;fobj)&nbsp;-&gt;&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written&nbsp;to&nbsp;file<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;use.<br>
+&nbsp;<br>
+fobj&nbsp;--&nbsp;File&nbsp;to&nbsp;write&nbsp;data&nbsp;to.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-ifetch"><strong>ifetch</strong></a>(self, varName)</dt><dd><tt>Return&nbsp;a&nbsp;fetch&nbsp;iterator&nbsp;for&nbsp;a&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-ifetch">ifetch</a>(varName)&nbsp;-&gt;&nbsp;iterator<br>
+&nbsp;<br>
+Unlike&nbsp;ifind,&nbsp;this&nbsp;method&nbsp;doesn't&nbsp;really&nbsp;provide&nbsp;any&nbsp;extra<br>
+functionality&nbsp;over&nbsp;the&nbsp;fetch&nbsp;method.&nbsp;&nbsp;It&nbsp;is&nbsp;provided&nbsp;for<br>
+completeness,&nbsp;and&nbsp;for&nbsp;those&nbsp;who&nbsp;just&nbsp;like&nbsp;iterators.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;ifetch&nbsp;can&nbsp;be&nbsp;used&nbsp;on&nbsp;FIFO&nbsp;and&nbsp;SINGLE&nbsp;mode&nbsp;variables,<br>
+but&nbsp;not&nbsp;LIFO&nbsp;and&nbsp;MULTI&nbsp;mode&nbsp;variables.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;iterator&nbsp;over.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-ifetchTry"><strong>ifetchTry</strong></a>(self, varName)</dt><dd><tt>Return&nbsp;a&nbsp;fetchTry&nbsp;iterator&nbsp;for&nbsp;a&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-ifetchTry">ifetchTry</a>(varName)&nbsp;-&gt;&nbsp;iterator<br>
+&nbsp;<br>
+Unlike&nbsp;ifindTry,&nbsp;this&nbsp;method&nbsp;doesn't&nbsp;really&nbsp;provide&nbsp;any&nbsp;extra<br>
+functionality&nbsp;over&nbsp;the&nbsp;fetchTry&nbsp;method.&nbsp;&nbsp;It&nbsp;is&nbsp;provided&nbsp;for<br>
+completeness,&nbsp;and&nbsp;for&nbsp;those&nbsp;who&nbsp;just&nbsp;like&nbsp;iterators.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;ifetchTry&nbsp;can&nbsp;be&nbsp;used&nbsp;on&nbsp;FIFO&nbsp;and&nbsp;SINGLE&nbsp;mode<br>
+variables,&nbsp;but&nbsp;not&nbsp;LIFO&nbsp;and&nbsp;MULTI&nbsp;mode&nbsp;variables.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;iterator&nbsp;over.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-ifind"><strong>ifind</strong></a>(self, varName)</dt><dd><tt>Return&nbsp;a&nbsp;find&nbsp;iterator&nbsp;for&nbsp;a&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-ifind">ifind</a>(varName)&nbsp;-&gt;&nbsp;iterator<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;very&nbsp;useful&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;see&nbsp;every&nbsp;value&nbsp;in&nbsp;a&nbsp;variable<br>
+without&nbsp;destroying&nbsp;them.&nbsp;&nbsp;Unlike&nbsp;the&nbsp;find&nbsp;method,&nbsp;ifind&nbsp;won't<br>
+return&nbsp;the&nbsp;same&nbsp;value&nbsp;repeatedly.&nbsp;&nbsp;When&nbsp;there&nbsp;are&nbsp;no&nbsp;more&nbsp;values<br>
+to&nbsp;return,&nbsp;the&nbsp;iterator&nbsp;will&nbsp;block,&nbsp;waiting&nbsp;for&nbsp;a&nbsp;new&nbsp;value&nbsp;to<br>
+arrive.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;ifind&nbsp;can&nbsp;be&nbsp;used&nbsp;on&nbsp;FIFO&nbsp;and&nbsp;SINGLE&nbsp;mode&nbsp;variables,<br>
+but&nbsp;not&nbsp;LIFO&nbsp;and&nbsp;MULTI&nbsp;mode&nbsp;variables.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;iterate&nbsp;over.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-ifindTry"><strong>ifindTry</strong></a>(self, varName)</dt><dd><tt>Return&nbsp;a&nbsp;findTry&nbsp;iterator&nbsp;for&nbsp;a&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-ifindTry">ifindTry</a>(varName)&nbsp;-&gt;&nbsp;iterator<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;very&nbsp;useful&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;see&nbsp;every&nbsp;value&nbsp;in&nbsp;a&nbsp;variable<br>
+without&nbsp;destroying&nbsp;them.&nbsp;&nbsp;Unlike&nbsp;the&nbsp;findTry&nbsp;method,&nbsp;ifindTry<br>
+won't&nbsp;return&nbsp;the&nbsp;same&nbsp;value&nbsp;repeatedly.&nbsp;&nbsp;When&nbsp;there&nbsp;are&nbsp;no&nbsp;more<br>
+values&nbsp;to&nbsp;return,&nbsp;the&nbsp;iterator&nbsp;finishes.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;ifindTry&nbsp;can&nbsp;be&nbsp;used&nbsp;on&nbsp;FIFO&nbsp;and&nbsp;SINGLE&nbsp;mode<br>
+variables,&nbsp;but&nbsp;not&nbsp;LIFO&nbsp;and&nbsp;MULTI&nbsp;mode&nbsp;variables.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;iterate&nbsp;over.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-listVars"><strong>listVars</strong></a>(self, wsName<font color="#909090">=None</font>, format<font color="#909090">='string'</font>)</dt><dd><tt>Return&nbsp;a&nbsp;listing&nbsp;of&nbsp;the&nbsp;variables&nbsp;in&nbsp;the&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-listVars">listVars</a>([wsName[,&nbsp;format]])&nbsp;-&gt;&nbsp;string&nbsp;or&nbsp;dictionary<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+wsName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;to&nbsp;list.&nbsp;&nbsp;The&nbsp;default&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None,&nbsp;which&nbsp;means&nbsp;to&nbsp;use&nbsp;the&nbsp;current&nbsp;workspace.<br>
+&nbsp;<br>
+format&nbsp;--&nbsp;Output&nbsp;format&nbsp;to&nbsp;return.&nbsp;&nbsp;Legal&nbsp;values&nbsp;include<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'string'&nbsp;and&nbsp;'dict'.&nbsp;&nbsp;The&nbsp;'string'&nbsp;format&nbsp;returns<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;string&nbsp;which&nbsp;is&nbsp;suitable&nbsp;for&nbsp;printing.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;'dict'&nbsp;format&nbsp;returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;tuples,&nbsp;where<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;first&nbsp;field&nbsp;is&nbsp;the&nbsp;variable&nbsp;name,&nbsp;the&nbsp;second&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;number&nbsp;of&nbsp;values,&nbsp;the&nbsp;third&nbsp;is&nbsp;the&nbsp;number&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetchers,&nbsp;the&nbsp;fourth&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;finders,&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;fifth&nbsp;is&nbsp;the&nbsp;variables&nbsp;mode.&nbsp;&nbsp;The&nbsp;default&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;'string'.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-makefile"><strong>makefile</strong></a>(self, varName, mode<font color="#909090">='r'</font>)</dt></dl>
+
+<dl><dt><a name="NetWorkSpace-store"><strong>store</strong></a>(self, varName, val)</dt><dd><tt>Store&nbsp;a&nbsp;new&nbsp;value&nbsp;into&nbsp;a&nbsp;variable&nbsp;in&nbsp;the&nbsp;workspace.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-store">store</a>(varName,&nbsp;val)<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+val&nbsp;--&nbsp;Value&nbsp;to&nbsp;store&nbsp;in&nbsp;the&nbsp;variable.</tt></dd></dl>
+
+<dl><dt><a name="NetWorkSpace-storeFile"><strong>storeFile</strong></a>(self, varName, fobj, n<font color="#909090">=0</font>)</dt><dd><tt>Store&nbsp;a&nbsp;new&nbsp;value&nbsp;into&nbsp;a&nbsp;variable&nbsp;in&nbsp;the&nbsp;workspace&nbsp;from&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+ws.<a href="#NetWorkSpace-storeFile">storeFile</a>(varName,&nbsp;fobj[,&nbsp;n])&nbsp;-&gt;&nbsp;number&nbsp;of&nbsp;bytes&nbsp;read&nbsp;from&nbsp;file<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;more&nbsp;data&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;file,<br>
+storeFile&nbsp;returns&nbsp;0,&nbsp;and&nbsp;does&nbsp;not&nbsp;store&nbsp;a&nbsp;value&nbsp;into&nbsp;the<br>
+workspace&nbsp;variable.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+fobj&nbsp;--&nbsp;File&nbsp;to&nbsp;read&nbsp;data&nbsp;from.<br>
+&nbsp;<br>
+n&nbsp;--&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;read&nbsp;from&nbsp;the&nbsp;file.&nbsp;&nbsp;A&nbsp;value&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zero&nbsp;means&nbsp;to&nbsp;read&nbsp;and&nbsp;store&nbsp;all&nbsp;of&nbsp;the&nbsp;data&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;zero.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsConnectException">class <strong>NwsConnectException</strong></a>(<a href="nws.client.html#NwsServerException">NwsServerException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Unable&nbsp;to&nbsp;connect&nbsp;to&nbsp;the&nbsp;NWS&nbsp;server.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsConnectException">NwsConnectException</a></dd>
+<dd><a href="nws.client.html#NwsServerException">NwsServerException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsConnectException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsConnectException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsConnectException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsConnectException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsConnectException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsConnectionDroppedException">class <strong>NwsConnectionDroppedException</strong></a>(<a href="nws.client.html#NwsServerException">NwsServerException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>NWS&nbsp;server&nbsp;connection&nbsp;dropped.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsConnectionDroppedException">NwsConnectionDroppedException</a></dd>
+<dd><a href="nws.client.html#NwsServerException">NwsServerException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsConnectionDroppedException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsConnectionDroppedException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsConnectionDroppedException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsConnectionDroppedException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsConnectionDroppedException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsDeclarationFailedException">class <strong>NwsDeclarationFailedException</strong></a>(<a href="nws.client.html#NwsOperationException">NwsOperationException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Variable&nbsp;declaration&nbsp;failed.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsDeclarationFailedException">NwsDeclarationFailedException</a></dd>
+<dd><a href="nws.client.html#NwsOperationException">NwsOperationException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsDeclarationFailedException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsDeclarationFailedException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsDeclarationFailedException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsDeclarationFailedException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsDeclarationFailedException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsException">class <strong>NwsException</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;all&nbsp;exceptions&nbsp;raised&nbsp;by&nbsp;this&nbsp;module.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsNoWorkSpaceException">class <strong>NwsNoWorkSpaceException</strong></a>(<a href="nws.client.html#NwsOperationException">NwsOperationException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>No&nbsp;such&nbsp;workspace.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsNoWorkSpaceException">NwsNoWorkSpaceException</a></dd>
+<dd><a href="nws.client.html#NwsOperationException">NwsOperationException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsNoWorkSpaceException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsNoWorkSpaceException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsNoWorkSpaceException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsNoWorkSpaceException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsNoWorkSpaceException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsOperationException">class <strong>NwsOperationException</strong></a>(<a href="nws.client.html#NwsException">NwsException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Error&nbsp;performing&nbsp;an&nbsp;NWS&nbsp;operation.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsOperationException">NwsOperationException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsOperationException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsOperationException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsOperationException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsOperationException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsOperationException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsOperationException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsOperationException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsPicklingException">class <strong>NwsPicklingException</strong></a>(<a href="nws.client.html#NwsOperationException">NwsOperationException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Error&nbsp;pickling&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsPicklingException">NwsPicklingException</a></dd>
+<dd><a href="nws.client.html#NwsOperationException">NwsOperationException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NwsPicklingException-__init__"><strong>__init__</strong></a>(self, exception, wsName, varName)</dt></dl>
+
+<dl><dt><a name="NwsPicklingException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsPicklingException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsPicklingException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsPicklingException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsPicklingException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsPicklingException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsPicklingException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsPicklingException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsPicklingException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsPicklingException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsPicklingException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsPicklingException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsPicklingException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsPicklingException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsPicklingException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsPicklingException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsPicklingException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsServer">class <strong>NwsServer</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Perform&nbsp;operations&nbsp;against&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+Operations&nbsp;against&nbsp;workspaces&nbsp;are&nbsp;performed<br>
+by&nbsp;using&nbsp;the&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;class.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NwsServer-__getstate__"><strong>__getstate__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NwsServer-__init__"><strong>__init__</strong></a>(self, host<font color="#909090">='localhost'</font>, port<font color="#909090">=8765</font>)</dt><dd><tt>Create&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+host&nbsp;--&nbsp;Host&nbsp;name&nbsp;of&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+port&nbsp;--&nbsp;Port&nbsp;of&nbsp;the&nbsp;NWS&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="NwsServer-__setstate__"><strong>__setstate__</strong></a>(self, d)</dt></dl>
+
+<dl><dt><a name="NwsServer-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NwsServer-close"><strong>close</strong></a>(self)</dt><dd><tt>Close&nbsp;the&nbsp;connection&nbsp;to&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+s.<a href="#NwsServer-close">close</a>()<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;indirectly&nbsp;cause&nbsp;the&nbsp;NWS&nbsp;server&nbsp;to&nbsp;purge&nbsp;all<br>
+non-persistent&nbsp;workspaces&nbsp;owned&nbsp;by&nbsp;this&nbsp;client.&nbsp;&nbsp;Purging&nbsp;may<br>
+not&nbsp;happen&nbsp;immediately,&nbsp;though,&nbsp;but&nbsp;will&nbsp;depend&nbsp;on&nbsp;the&nbsp;load&nbsp;on<br>
+the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="NwsServer-deleteWs"><strong>deleteWs</strong></a>(self, wsName)</dt><dd><tt>Delete&nbsp;the&nbsp;specfied&nbsp;workspace&nbsp;on&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+s.<a href="#NwsServer-deleteWs">deleteWs</a>(wsName)<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+wsName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;to&nbsp;delete.</tt></dd></dl>
+
+<dl><dt><a name="NwsServer-listWss"><strong>listWss</strong></a>(self, format<font color="#909090">='string'</font>)</dt><dd><tt>Return&nbsp;a&nbsp;listing&nbsp;of&nbsp;all&nbsp;of&nbsp;the&nbsp;workspaces&nbsp;on&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+s.<a href="#NwsServer-listWss">listWss</a>([format])&nbsp;-&gt;&nbsp;string&nbsp;or&nbsp;dictionary<br>
+&nbsp;<br>
+The&nbsp;listing&nbsp;is&nbsp;a&nbsp;string,&nbsp;consisting&nbsp;of&nbsp;lines,&nbsp;each&nbsp;ending&nbsp;with&nbsp;a<br>
+newline.&nbsp;&nbsp;Each&nbsp;line&nbsp;consists&nbsp;of&nbsp;tab&nbsp;separated&nbsp;fields.&nbsp;&nbsp;The&nbsp;first<br>
+field&nbsp;is&nbsp;the&nbsp;workspace&nbsp;name,&nbsp;prefixed&nbsp;with&nbsp;either&nbsp;a&nbsp;'&gt;'&nbsp;or&nbsp;a<br>
+space,&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;client&nbsp;owns&nbsp;that&nbsp;workspace&nbsp;or<br>
+not.</tt></dd></dl>
+
+<dl><dt><a name="NwsServer-mktempWs"><strong>mktempWs</strong></a>(self, wsName<font color="#909090">='__pyws__%d'</font>)</dt><dd><tt>Make&nbsp;a&nbsp;temporary&nbsp;workspace&nbsp;on&nbsp;the&nbsp;NWS&nbsp;server.<br>
+&nbsp;<br>
+s.<a href="#NwsServer-mktempWs">mktempWs</a>([wsName])&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+The&nbsp;workspace&nbsp;is&nbsp;named&nbsp;using&nbsp;the&nbsp;template&nbsp;and&nbsp;a&nbsp;number<br>
+generated&nbsp;by&nbsp;the&nbsp;server&nbsp;that&nbsp;makes&nbsp;the&nbsp;workspace&nbsp;name&nbsp;unique.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;the&nbsp;workspace&nbsp;will&nbsp;be&nbsp;created,&nbsp;but&nbsp;it&nbsp;will&nbsp;not&nbsp;be<br>
+owned&nbsp;until&nbsp;some&nbsp;client&nbsp;that&nbsp;is&nbsp;willing&nbsp;to&nbsp;take&nbsp;ownership&nbsp;of&nbsp;it<br>
+opens&nbsp;it.<br>
+&nbsp;<br>
+The&nbsp;return&nbsp;value&nbsp;is&nbsp;the&nbsp;actual&nbsp;name&nbsp;of&nbsp;workspace&nbsp;that&nbsp;was<br>
+created.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+wsName&nbsp;--&nbsp;Template&nbsp;for&nbsp;the&nbsp;workspace&nbsp;name.&nbsp;&nbsp;This&nbsp;must&nbsp;be&nbsp;a&nbsp;legal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'format'&nbsp;string,&nbsp;containing&nbsp;only&nbsp;an&nbsp;integer&nbsp;format<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specifier.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;'__pyws__%d'.<br>
+&nbsp;<br>
+Examples:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Let's&nbsp;create&nbsp;an&nbsp;<a href="#NwsServer">NwsServer</a>,&nbsp;call&nbsp;mktempWs&nbsp;to&nbsp;make&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;workspace,&nbsp;and&nbsp;then&nbsp;use&nbsp;openWs&nbsp;to&nbsp;create&nbsp;a&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;that&nbsp;workspace:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.client&nbsp;import&nbsp;<a href="#NwsServer">NwsServer</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;server&nbsp;=&nbsp;<a href="#NwsServer">NwsServer</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;name&nbsp;=&nbsp;server.<a href="#NwsServer-mktempWs">mktempWs</a>('example_%d')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;workspace&nbsp;=&nbsp;server.<a href="#NwsServer-openWs">openWs</a>(name)</tt></dd></dl>
+
+<dl><dt><a name="NwsServer-openWs"><strong>openWs</strong></a>(self, wsName, space<font color="#909090">=None</font>, **opt)</dt><dd><tt>Open&nbsp;a&nbsp;workspace.<br>
+&nbsp;<br>
+s.<a href="#NwsServer-openWs">openWs</a>(wsName[,&nbsp;space])&nbsp;-&gt;&nbsp;space<br>
+&nbsp;<br>
+If&nbsp;called&nbsp;without&nbsp;a&nbsp;space&nbsp;argument,&nbsp;this&nbsp;method&nbsp;will&nbsp;construct&nbsp;a<br>
+<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;will&nbsp;be&nbsp;associated&nbsp;with&nbsp;this&nbsp;<a href="#NwsServer">NwsServer</a><br>
+<a href="__builtin__.html#object">object</a>,&nbsp;and&nbsp;then&nbsp;perform&nbsp;an&nbsp;open&nbsp;operation&nbsp;with&nbsp;it&nbsp;against&nbsp;the&nbsp;NWS<br>
+server.&nbsp;&nbsp;The&nbsp;open&nbsp;operation&nbsp;tells&nbsp;the&nbsp;NWS&nbsp;server&nbsp;that&nbsp;this<br>
+client&nbsp;wants&nbsp;to&nbsp;use&nbsp;that&nbsp;workspace,&nbsp;and&nbsp;is&nbsp;willing&nbsp;to&nbsp;take<br>
+ownership&nbsp;of&nbsp;it,&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;already&nbsp;exist.<br>
+&nbsp;<br>
+The&nbsp;space&nbsp;argument&nbsp;is&nbsp;only&nbsp;intended&nbsp;to&nbsp;be&nbsp;used&nbsp;from&nbsp;the<br>
+<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;constructor.<br>
+&nbsp;<br>
+The&nbsp;return&nbsp;value&nbsp;is&nbsp;the&nbsp;constructed&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+wsName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;to&nbsp;open.&nbsp;&nbsp;If&nbsp;the&nbsp;space&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;None,&nbsp;this&nbsp;value&nbsp;must&nbsp;match&nbsp;the&nbsp;space's&nbsp;name.<br>
+&nbsp;<br>
+space&nbsp;--&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;open&nbsp;operation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;value&nbsp;is&nbsp;None,&nbsp;then&nbsp;openWs&nbsp;will&nbsp;construct&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;specifying&nbsp;this&nbsp;<a href="#NwsServer">NwsServer</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;space's&nbsp;server.&nbsp;&nbsp;Note&nbsp;that&nbsp;this&nbsp;argument&nbsp;is&nbsp;only<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intended&nbsp;to&nbsp;be&nbsp;used&nbsp;from&nbsp;the&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;None.<br>
+&nbsp;<br>
+Keyword&nbsp;Arguments:<br>
+&nbsp;<br>
+persistent&nbsp;--&nbsp;Boolean&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;workspace<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should&nbsp;be&nbsp;persistent&nbsp;or&nbsp;not.&nbsp;&nbsp;See&nbsp;the&nbsp;description&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;persistent&nbsp;argument&nbsp;in&nbsp;the&nbsp;__init__&nbsp;method&nbsp;of&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;class&nbsp;for&nbsp;more&nbsp;information.<br>
+&nbsp;<br>
+create&nbsp;--&nbsp;Boolean&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;workspace&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;created&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;already&nbsp;exist.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;true.<br>
+&nbsp;<br>
+Examples:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Let's&nbsp;create&nbsp;an&nbsp;<a href="#NwsServer">NwsServer</a>,&nbsp;and&nbsp;then&nbsp;use&nbsp;openWs&nbsp;to&nbsp;create&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;a&nbsp;workspace&nbsp;called&nbsp;'foo':<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.client&nbsp;import&nbsp;<a href="#NwsServer">NwsServer</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;server&nbsp;=&nbsp;<a href="#NwsServer">NwsServer</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;workspace&nbsp;=&nbsp;server.<a href="#NwsServer-openWs">openWs</a>('foo')<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;this&nbsp;is&nbsp;(nearly)&nbsp;equivalent&nbsp;to:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.client&nbsp;import&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;workspace&nbsp;=&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>('foo')</tt></dd></dl>
+
+<dl><dt><a name="NwsServer-useWs"><strong>useWs</strong></a>(self, wsName, space<font color="#909090">=None</font>, **opt)</dt><dd><tt>Use&nbsp;a&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+s.<a href="#NwsServer-useWs">useWs</a>(wsName[,&nbsp;space])&nbsp;-&gt;&nbsp;space<br>
+&nbsp;<br>
+If&nbsp;called&nbsp;without&nbsp;a&nbsp;space&nbsp;argument,&nbsp;this&nbsp;method&nbsp;will&nbsp;construct&nbsp;a<br>
+<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;that&nbsp;will&nbsp;be&nbsp;associated&nbsp;with&nbsp;this&nbsp;<a href="#NwsServer">NwsServer</a><br>
+<a href="__builtin__.html#object">object</a>,&nbsp;and&nbsp;then&nbsp;perform&nbsp;a&nbsp;use&nbsp;operation&nbsp;with&nbsp;it&nbsp;against&nbsp;the&nbsp;NWS<br>
+server.&nbsp;&nbsp;The&nbsp;use&nbsp;operation&nbsp;tells&nbsp;the&nbsp;NWS&nbsp;server&nbsp;that&nbsp;this&nbsp;client<br>
+wants&nbsp;to&nbsp;use&nbsp;that&nbsp;workspace,&nbsp;but&nbsp;is&nbsp;not&nbsp;willing&nbsp;to&nbsp;take<br>
+ownership&nbsp;of&nbsp;it.<br>
+&nbsp;<br>
+The&nbsp;space&nbsp;argument&nbsp;is&nbsp;only&nbsp;intended&nbsp;to&nbsp;be&nbsp;used&nbsp;from&nbsp;the<br>
+<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;constructor.<br>
+&nbsp;<br>
+The&nbsp;return&nbsp;value&nbsp;is&nbsp;the&nbsp;constructed&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+wsName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;to&nbsp;use.&nbsp;&nbsp;If&nbsp;the&nbsp;space&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;None,&nbsp;this&nbsp;value&nbsp;must&nbsp;match&nbsp;the&nbsp;space's&nbsp;name.<br>
+&nbsp;<br>
+space&nbsp;--&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;use&nbsp;for&nbsp;the&nbsp;use&nbsp;operation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;value&nbsp;is&nbsp;None,&nbsp;then&nbsp;useWs&nbsp;will&nbsp;construct&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;specifying&nbsp;this&nbsp;<a href="#NwsServer">NwsServer</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;space's&nbsp;server.&nbsp;&nbsp;Note&nbsp;that&nbsp;this&nbsp;argument&nbsp;is&nbsp;only<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intended&nbsp;to&nbsp;be&nbsp;used&nbsp;from&nbsp;the&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;constructor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;None.<br>
+&nbsp;<br>
+Keyword&nbsp;Arguments:<br>
+&nbsp;<br>
+create&nbsp;--&nbsp;Boolean&nbsp;value&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;workspace&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;created&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;already&nbsp;exist.&nbsp;&nbsp;The&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;is&nbsp;true.<br>
+&nbsp;<br>
+Examples:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Let's&nbsp;create&nbsp;an&nbsp;<a href="#NwsServer">NwsServer</a>,&nbsp;and&nbsp;then&nbsp;use&nbsp;useWs&nbsp;to&nbsp;create&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;a&nbsp;workspace&nbsp;called&nbsp;'foo':<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.client&nbsp;import&nbsp;<a href="#NwsServer">NwsServer</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;server&nbsp;=&nbsp;<a href="#NwsServer">NwsServer</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;workspace&nbsp;=&nbsp;server.<a href="#NwsServer-useWs">useWs</a>('foo')<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;this&nbsp;is&nbsp;(nearly)&nbsp;equivalent&nbsp;to:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;nws.client&nbsp;import&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;workspace&nbsp;=&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>('foo',&nbsp;useUse=True)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsServerException">class <strong>NwsServerException</strong></a>(<a href="nws.client.html#NwsException">NwsException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Error&nbsp;communicating&nbsp;with&nbsp;the&nbsp;NWS&nbsp;server.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsServerException">NwsServerException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsServerException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsServerException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsServerException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsServerException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsServerException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsServerException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsServerException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsUnpicklingException">class <strong>NwsUnpicklingException</strong></a>(<a href="nws.client.html#NwsOperationException">NwsOperationException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Error&nbsp;unpickling&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsUnpicklingException">NwsUnpicklingException</a></dd>
+<dd><a href="nws.client.html#NwsOperationException">NwsOperationException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NwsUnpicklingException-__init__"><strong>__init__</strong></a>(self, exception, wsName, varName, obj)</dt></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsUnpicklingException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsUnpicklingException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnpicklingException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnpicklingException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnpicklingException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnpicklingException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnpicklingException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnpicklingException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsUnpicklingException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsUnsupportedOperationException">class <strong>NwsUnsupportedOperationException</strong></a>(<a href="nws.client.html#NwsServerException">NwsServerException</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>NWS&nbsp;server&nbsp;does&nbsp;not&nbsp;support&nbsp;this&nbsp;operation.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="nws.client.html#NwsUnsupportedOperationException">NwsUnsupportedOperationException</a></dd>
+<dd><a href="nws.client.html#NwsServerException">NwsServerException</a></dd>
+<dd><a href="nws.client.html#NwsException">NwsException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="nws.client.html#NwsException">NwsException</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="NwsUnsupportedOperationException-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;x.__class__.__doc__&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x8178c0&gt;<dd><tt>T.<a href="#NwsUnsupportedOperationException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="NwsUnsupportedOperationException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#NwsUnsupportedOperationException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="NwsUnsupportedOperationException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NwsValueIterator">class <strong>NwsValueIterator</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Implements&nbsp;the&nbsp;iterated&nbsp;operations&nbsp;against&nbsp;a&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+Instances&nbsp;of&nbsp;this&nbsp;class&nbsp;are&nbsp;returned&nbsp;from&nbsp;the&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;ifetch,<br>
+ifetchTry,&nbsp;ifind,&nbsp;and&nbsp;ifindTry&nbsp;methods.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NwsValueIterator-__init__"><strong>__init__</strong></a>(self, ws, varName, op)</dt><dd><tt>Create&nbsp;an&nbsp;iterator&nbsp;over&nbsp;a&nbsp;workspace&nbsp;varible.<br>
+&nbsp;<br>
+This&nbsp;constructor&nbsp;is&nbsp;intended&nbsp;for&nbsp;internal&nbsp;use&nbsp;only.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+ws&nbsp;--&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;containing&nbsp;the&nbsp;specified&nbsp;variable.<br>
+&nbsp;<br>
+varName&nbsp;--&nbsp;Name&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable&nbsp;to&nbsp;iterate&nbsp;over.<br>
+&nbsp;<br>
+op&nbsp;--&nbsp;Operation&nbsp;to&nbsp;perform.</tt></dd></dl>
+
+<dl><dt><a name="NwsValueIterator-__iter__"><strong>__iter__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NwsValueIterator-next"><strong>next</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NwsValueIterator-reset"><strong>reset</strong></a>(self)</dt><dd><tt>Reset&nbsp;the&nbsp;iterator&nbsp;to&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;workspace&nbsp;variable.<br>
+&nbsp;<br>
+This&nbsp;conveniently&nbsp;restores&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;iterator&nbsp;to&nbsp;when&nbsp;it<br>
+was&nbsp;first&nbsp;created.</tt></dd></dl>
+
+<dl><dt><a name="NwsValueIterator-restart"><strong>restart</strong></a>(self)</dt><dd><tt>Allow&nbsp;the&nbsp;iterator&nbsp;to&nbsp;continue&nbsp;where&nbsp;it&nbsp;left&nbsp;off&nbsp;after&nbsp;stopping.<br>
+&nbsp;<br>
+The&nbsp;Python&nbsp;iterator&nbsp;protocol&nbsp;requires&nbsp;that&nbsp;iterators&nbsp;continue&nbsp;to<br>
+raise&nbsp;StopIteration&nbsp;once&nbsp;they've&nbsp;raised&nbsp;it.&nbsp;&nbsp;The<br>
+<a href="#NwsValueIterator">NwsValueIterator</a>&nbsp;will&nbsp;do&nbsp;that&nbsp;unless&nbsp;and&nbsp;until&nbsp;you&nbsp;call&nbsp;this<br>
+method.&nbsp;&nbsp;That&nbsp;can&nbsp;be&nbsp;useful&nbsp;for&nbsp;the&nbsp;"Try"&nbsp;iterators,&nbsp;where&nbsp;you<br>
+might&nbsp;want&nbsp;to&nbsp;find&nbsp;all&nbsp;of&nbsp;the&nbsp;values&nbsp;in&nbsp;a&nbsp;variable,&nbsp;and&nbsp;at&nbsp;a<br>
+later&nbsp;point&nbsp;see&nbsp;if&nbsp;there&nbsp;are&nbsp;any&nbsp;new&nbsp;values&nbsp;without&nbsp;having&nbsp;to<br>
+see&nbsp;the&nbsp;previous&nbsp;ones&nbsp;again.</tt></dd></dl>
+
+<dl><dt><a name="NwsValueIterator-writeTo"><strong>writeTo</strong></a>(self, fobj)</dt><dd><tt>Write&nbsp;the&nbsp;next&nbsp;value&nbsp;to&nbsp;the&nbsp;specified&nbsp;file&nbsp;or&nbsp;file-like&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+it.<a href="#NwsValueIterator-writeTo">writeTo</a>(fobj)&nbsp;-&gt;&nbsp;number&nbsp;of&nbsp;bytes&nbsp;written&nbsp;to&nbsp;file<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;very&nbsp;much&nbsp;like&nbsp;the&nbsp;"next"&nbsp;method,&nbsp;but&nbsp;unlike&nbsp;"next",&nbsp;is<br>
+intended&nbsp;to&nbsp;be&nbsp;called&nbsp;explicitly.&nbsp;&nbsp;It&nbsp;provides&nbsp;the&nbsp;same&nbsp;kind&nbsp;of<br>
+functionality&nbsp;as&nbsp;the&nbsp;various&nbsp;<a href="#NetWorkSpace">NetWorkSpace</a>&nbsp;findFile/fetchTryFile<br>
+methods.&nbsp;&nbsp;It&nbsp;is&nbsp;the&nbsp;easiest&nbsp;and&nbsp;most&nbsp;memory&nbsp;efficient&nbsp;way&nbsp;to<br>
+non-destructively&nbsp;write&nbsp;all&nbsp;of&nbsp;the&nbsp;values&nbsp;of&nbsp;a&nbsp;variable&nbsp;to&nbsp;a<br>
+file.<br>
+&nbsp;<br>
+Arguments:<br>
+&nbsp;<br>
+fobj&nbsp;--&nbsp;File&nbsp;to&nbsp;write&nbsp;data&nbsp;to.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>DICT</strong> = 'dict'<br>
+<strong>FIFO</strong> = 'fifo'<br>
+<strong>LIFO</strong> = 'lifo'<br>
+<strong>MULTI</strong> = 'multi'<br>
+<strong>SINGLE</strong> = 'single'<br>
+<strong>STRING</strong> = 'string'<br>
+<strong>V_FETCHERS</strong> = 2<br>
+<strong>V_FINDERS</strong> = 3<br>
+<strong>V_MODE</strong> = 4<br>
+<strong>V_VALUES</strong> = 1<br>
+<strong>V_VARIABLE</strong> = 0<br>
+<strong>WS_MINE</strong> = 1<br>
+<strong>WS_NAME</strong> = 0<br>
+<strong>WS_NUMVARS</strong> = 4<br>
+<strong>WS_OWNER</strong> = 2<br>
+<strong>WS_PERSISTENT</strong> = 3<br>
+<strong>WS_VARLIST</strong> = 5<br>
+<strong>__all__</strong> = ['NwsServer', 'NetWorkSpace', 'NwsValueIterator', 'NwsException', 'NwsServerException', 'NwsConnectException', 'NwsConnectionDroppedException', 'NwsUnsupportedOperationException', 'NwsOperationException', 'NwsNoWorkSpaceException', 'NwsDeclarationFailedException', 'NwsPicklingException', 'NwsUnpicklingException', 'FIFO', 'LIFO', 'MULTI', 'SINGLE', 'STRING', 'DICT', 'WS_NAME', ...]</td></tr></table>
+</body></html>
